@@ -9,8 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Course {
 
@@ -21,7 +25,7 @@ public class Course {
 	@Column
 	private String courseTopic;
 
-	@OneToMany(mappedBy = "course", cascade = {CascadeType.PERSIST})
+	@OneToMany(mappedBy = "course", cascade = { CascadeType.PERSIST })
 	private List<Lesson> lessons;
 
 	public Course() {

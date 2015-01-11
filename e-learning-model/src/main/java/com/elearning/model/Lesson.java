@@ -9,9 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Lesson {
 
@@ -24,6 +30,7 @@ public class Lesson {
 	@OneToMany(mappedBy = "lesson", cascade = {CascadeType.PERSIST})
 	private List<LessonStep> lessonSteps;
 	
+	@XmlTransient
 	@JsonIgnore
 	@ManyToOne
 	private Course course;
