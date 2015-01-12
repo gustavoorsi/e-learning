@@ -1,20 +1,7 @@
 package com.elearning.rest;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlAccessType;
-
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.bytecode.AnnotationsAttribute;
-import javassist.bytecode.ClassFile;
-import javassist.bytecode.ConstPool;
-import javassist.bytecode.annotation.Annotation;
-import javassist.bytecode.annotation.ClassMemberValue;
-import javassist.bytecode.annotation.StringMemberValue;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -25,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,12 +22,24 @@ import com.elearning.model.Lesson;
 import com.elearning.persistence.jparepositories.CourseRepository;
 import com.elearning.persistence.jparepositories.LessonRepository;
 import com.elearning.rest.resources.CourseResource;
+import com.elearning.rest.resources.CourseResources;
 import com.elearning.service.CourseService;
 import com.elearning.service.LessonService;
 
+/**
+ * 
+ * Rest endpoint that handles all course related actions.
+ * 
+ * @author Gustavo Orsi
+ *
+ */
 @RestController
 @RequestMapping("/courses")
 public class CourseRestController {
+
+	// *************************************************************//
+	// *********************** PROPERTIES **************************//
+	// *************************************************************//
 
 	@Autowired
 	private CourseService courseService;
@@ -53,79 +53,58 @@ public class CourseRestController {
 	@Autowired
 	private LessonRepository lessonRepository;
 
+	// *************************************************************//
+	// ********************* REST SERVICES *************************//
+	// *************************************************************//
+
 	/**
+	 * Return a list of <code>CourseResourse</code> instances wrapped in a <code>CourseResources</code> object.
 	 * 
-	 * @return
+	 * @return a <code>CourseResoureces</code> instance containing all courses.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public Collection<CourseResource> getAll() {
-		
-//		try {
-//			makingAnnotationAtRuntime( "com.elearning.rest.CourseRestController", "javax.xml.bind.annotation.XmlRootElement", null, null );
-//			makingAnnotationAtRuntime( "com.elearning.rest.CourseRestController", "javax.xml.bind.annotation.XmlAccessorType", "value", "javax.xml.bind.annotation.XmlAccessType.NONE" );
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		Collection<CourseResource> courseResources = new ArrayList<CourseResource>();
+	public CourseResources getAll() {
 
-		for (Course c : this.courseRepository.findAll()) {
-			courseResources.add(new CourseResource(c));
-		}
+		List<CourseResource> courseResources = new ArrayList<CourseResource>();
 
-		return courseResources;
+		List<Course> courses = this.courseRepository.findAll();
+
+		courses.stream().map(p -> new CourseResource(p)).forEach(p -> courseResources.add(p));
+
+		return new CourseResources(courseResources);
 	}
 
-	
-//	public byte[] makingAnnotationAtRuntime( final String targetClassName, final String annotationName, final String paramName, final String paramValue ) throws Exception {
-//
-//		ClassPool pool = ClassPool.getDefault();
-//		CtClass proxyClass = pool.get(targetClassName);
-//
-//		// get annotations from class called HelloWorldService
-//		Object[] all = proxyClass.getAnnotations();
-//
-//		// get the class file and add the annotation
-//		ClassFile classFile = proxyClass.getClassFile();
-//		ConstPool constantPool = classFile.getConstPool();
-//
-//		AnnotationsAttribute attr = new AnnotationsAttribute(constantPool, AnnotationsAttribute.visibleTag);
-//		Annotation annotation = new Annotation(annotationName, constantPool);
-//
-//		if (attr != null && paramName != null ) {
-//			annotation.addMemberValue(paramName, new ClassMemberValue(paramValue, constantPool) );
-//		}
-//
-//		attr.addAnnotation(annotation);
-//		classFile.addAttribute(attr);
-//		classFile.setVersionToJava5();
-//
-//		// transform the classfile into bytecode
-//		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//		DataOutputStream os = new DataOutputStream(bos);
-//		classFile.write(os);
-//		os.close();
-//
-//		// get annotations from Class
-//		all = proxyClass.getAnnotations();
-//		int i = 0;
-//		for (Object object : all) {
-//			System.out.println(all[i]);
-//			i++;
-//		}
-//
-//		return bos.toByteArray();
-//	}
+	/**
+	 * Just a stupid method to show the use of lambda expression/statements.
+	 * 
+	 * @param filterByLessonCount
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, params = "filterByLessonCount")
+	public CourseResources getAllWithMoreThan2Lessons(
+			@RequestParam(defaultValue = "2", value = "filterByLessonCount") int filterByLessonCount) {
+
+		List<CourseResource> courseResources = new ArrayList<CourseResource>();
+
+		List<Course> courses = this.courseRepository.findAll();
+
+		courses.stream().filter(p -> (p.getLessons().size() > filterByLessonCount)).map(p -> new CourseResource(p))
+				.forEach(p -> courseResources.add(p));
+
+		return new CourseResources(courseResources);
+	}
 
 	/**
+	 * Get a course based on the path variable <code>courseId</code>. If the course is not found then return a 404 with an message
+	 * explanation. (see <code>ExceptionControllerAdvice</code> for more detail.)
 	 * 
 	 * @param courseId
-	 * @return
+	 * @return a <code>CourseResource</code>
 	 */
 	@RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
 	public CourseResource getCourse(@PathVariable Long courseId) {
 
+		// note: courseRepository returns an Option instance, so we can use the utility method .orElseThrow() and lambda expression.
 		Course course = this.courseRepository.findById(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
 
 		return new CourseResource(course);

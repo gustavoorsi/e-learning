@@ -18,10 +18,6 @@ import com.elearning.persistence.jparepositories.LessonStepRepository;
 @EnableAutoConfiguration
 public class ModelApplication {
 
-	// public static void main(String[] args) {
-	// SpringApplication.run(ModelApplication.class, args);
-	// }
-
 	// populate db with some test date.
 	@Bean
 	CommandLineRunner init(LessonStepRepository lessonStepRepository, LessonRepository lessonRepository, CourseRepository courseRepository) {
@@ -42,7 +38,24 @@ public class ModelApplication {
 			courseOne.addLesson(lessonOne).addLesson(lessonTwo);
 
 			courseRepository.save(courseOne);
+			
+			
+			/////////////////////////////////////////////////////////////////////
+			
+			Course courseTwo = new Course("Hibernate");
+			Lesson courseTwoLessonOne = new Lesson("Hibernate configuration");
+
+			courseTwoLessonOne.addLessonStep(new LessonStep("config using xml"))
+					.addLessonStep(new LessonStep("config using annotations"))
+					.addLessonStep(new LessonStep("test your configuration"));
+
+			courseTwo.addLesson(courseTwoLessonOne);
+
+			courseRepository.save(courseTwo);
+			
 
 		};
 	}
+	
+	
 }
