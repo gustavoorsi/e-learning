@@ -13,6 +13,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * 
+ * Model class that represent a Course. A course can have as many lessons or either none, only requirement is to have a courseTopic.
+ * 
+ * @author Gustavo Orsi
+ *
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity

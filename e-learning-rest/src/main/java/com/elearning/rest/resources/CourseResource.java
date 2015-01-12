@@ -12,6 +12,12 @@ import org.springframework.hateoas.ResourceSupport;
 import com.elearning.model.Course;
 import com.elearning.rest.CourseRestController;
 
+/**
+ * Wrapper for Course. Here we add some useful links.
+ * 
+ * @author Gustavo Orsi
+ *
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CourseResource extends ResourceSupport {

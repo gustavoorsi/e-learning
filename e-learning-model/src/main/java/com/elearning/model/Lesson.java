@@ -16,6 +16,13 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * 
+ * Model class that represent a Lesson. A lesson can have as many lessonStep or either none, only requirement is to have a lessonName and belong to a course.
+ * 
+ * @author Gustavo Orsi
+ *
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity

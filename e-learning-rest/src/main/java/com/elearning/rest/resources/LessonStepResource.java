@@ -8,6 +8,12 @@ import org.springframework.hateoas.ResourceSupport;
 import com.elearning.model.LessonStep;
 import com.elearning.rest.LessonRestController;
 
+/**
+ * Wrapper for LessonStep. Here we add some useful links.
+ * 
+ * @author Gustavo Orsi
+ *
+ */
 public class LessonStepResource extends ResourceSupport {
 
 	private final LessonStep lessonStep;

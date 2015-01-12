@@ -10,14 +10,31 @@ import com.elearning.model.Course;
 import com.elearning.persistence.jparepositories.CourseRepository;
 import com.elearning.service.CourseService;
 
+/**
+ * 
+ * Service layer. All course related service methods goes here.
+ * 
+ * @author Gustavo Orsi
+ *
+ */
 @Service
 @Transactional
 public class CourseServiceImpl implements CourseService {
-	
+
+	// *************************************************************//
+	// *********************** PROPERTIES **************************//
+	// *************************************************************//
+
 	@Autowired
 	private CourseRepository courseRepository;
 
+	// *************************************************************//
+	// ********************* METHOD SERVICES ***********************//
+	// *************************************************************//
+
 	/**
+	 * 
+	 * Add a new course. If a course already exist then throw a new CourseTopicAlreadyExistException.
 	 * 
 	 */
 	@Override
@@ -28,7 +45,7 @@ public class CourseServiceImpl implements CourseService {
 		}
 
 		Course course = this.courseRepository.save(input);
-		
+
 		return course;
 	}
 

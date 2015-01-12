@@ -69,6 +69,7 @@ public class CourseRestController {
 
 		List<Course> courses = this.courseRepository.findAll();
 
+		// using lambda to wrap courses into CourseResource.
 		courses.stream().map(p -> new CourseResource(p)).forEach(p -> courseResources.add(p));
 
 		return new CourseResources(courseResources);
@@ -88,6 +89,7 @@ public class CourseRestController {
 
 		List<Course> courses = this.courseRepository.findAll();
 
+		// using lambda to wrap courses into CourseResource and filter out those that don't comply with the requirement.
 		courses.stream().filter(p -> (p.getLessons().size() > filterByLessonCount)).map(p -> new CourseResource(p))
 				.forEach(p -> courseResources.add(p));
 
@@ -111,9 +113,10 @@ public class CourseRestController {
 	}
 
 	/**
+	 * Add a new course only if there is no other with the same topic. 
 	 * 
 	 * @param input
-	 * @return
+	 * @return a 201 response code and the new resource uri or a <code>HttpStatus.FORBIDDEN</code> in case the course already exist.
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	ResponseEntity<?> add(@RequestBody Course input) {
@@ -127,10 +130,11 @@ public class CourseRestController {
 	}
 
 	/**
+	 * Adds a new lesson to an existing course.
 	 * 
 	 * @param courseId
 	 * @param input
-	 * @return
+	 * @return a 201 response code and the new resource uri or a <code>HttpStatus.NOT_FOUND</code> in case the course does not exist.
 	 */
 	@RequestMapping(value = "/{courseId}/lesson", method = RequestMethod.POST)
 	ResponseEntity<?> addLesson(@PathVariable Long courseId, @RequestBody Lesson input) {
