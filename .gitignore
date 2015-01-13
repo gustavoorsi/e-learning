@@ -1,6 +1,7 @@
-#project
-target/
-
+# Directories #
+/build/
+/bin/
+target/ 
 
 # Windows image file caches
 Thumbs.db

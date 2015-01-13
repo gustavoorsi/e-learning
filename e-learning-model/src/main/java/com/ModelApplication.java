@@ -1,6 +1,7 @@
 package com;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +18,10 @@ import com.elearning.persistence.jparepositories.LessonStepRepository;
 @ComponentScan
 @EnableAutoConfiguration
 public class ModelApplication {
+	
+	public static void main(String[] args) {
+		SpringApplication.run(ModelApplication.class, args);
+	}
 
 	// populate db with some test date.
 	@Bean
