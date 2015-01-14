@@ -1,0 +1,16 @@
+spring:
+ application:
+  name: e-learning-cloudconfig
+  
+  
+#spring:
+# platform:
+#  config:
+#   server:
+#    uri: https://github.com/gustavoorsi/e-learning-spring-config-properties
+
+ #spring:
+ # cloud:
+ #   config:
+ #     server:
+ #       uri: ${conf:https://github.com/gustavoorsi/e-learning-spring-config-properties}

@@ -9,41 +9,27 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+
 	<packaging>jar</packaging>
-	<name>e-learning-model</name>
-	<description>Project that contains all model classes.</description>
-	<artifactId>e-learning-model</artifactId>
+	<name>e-learning-cloudconfig</name>
+	<description>Config root project</description>
+	<artifactId>e-learning-cloudconfig</artifactId>
 
 	<properties>
 		<main.basedir>${basedir}/..</main.basedir>
 	</properties>
 
-
 	<dependencies>
-
+	
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
+		
 	</dependencies>
-
-	<build>
-		<finalName>e-learning-model</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
