@@ -29,8 +29,10 @@ import com.elearning.persistence.jparepositories.CourseRepository;
 import com.elearning.persistence.jparepositories.LessonRepository;
 import com.elearning.rest1.resources.CourseResource;
 import com.elearning.rest1.resources.CourseResources;
+import com.elearning.rest1.resources.Rest1ServiceEurekaLinkCreator;
 import com.elearning.service.CourseService;
 import com.elearning.service.LessonService;
+
 /**
  * 
  * Rest endpoint that handles all course related actions.
@@ -58,6 +60,9 @@ public class CourseRestController {
 	@Autowired
 	private LessonRepository lessonRepository;
 
+	@Autowired
+	private Rest1ServiceEurekaLinkCreator rest1ServiceEurekaLinkCreator;
+
 	// *************************************************************//
 	// ********************* REST SERVICES *************************//
 	// *************************************************************//
@@ -75,7 +80,7 @@ public class CourseRestController {
 		List<Course> courses = this.courseRepository.findAll();
 
 		// using lambda to wrap courses into CourseResource.
-		courses.stream().map(p -> new CourseResource(p)).forEach(p -> courseResources.add(p));
+		courses.stream().map(p -> new CourseResource(p, rest1ServiceEurekaLinkCreator)).forEach(p -> courseResources.add(p));
 
 		return new CourseResources(courseResources);
 	}
@@ -97,8 +102,8 @@ public class CourseRestController {
 		List<Course> courses = this.courseRepository.findAll();
 
 		// using lambda to wrap courses into CourseResource and filter out those that don't comply with the requirement.
-		courses.stream().filter(p -> (p.getLessons().size() > filterByLessonCount)).map(p -> new CourseResource(p))
-				.forEach(p -> courseResources.add(p));
+		courses.stream().filter(p -> (p.getLessons().size() > filterByLessonCount))
+				.map(p -> new CourseResource(p, rest1ServiceEurekaLinkCreator)).forEach(p -> courseResources.add(p));
 
 		return new CourseResources(courseResources);
 	}
@@ -116,7 +121,7 @@ public class CourseRestController {
 		// note: courseRepository returns an Option instance, so we can use the utility method .orElseThrow() and lambda expression.
 		Course course = this.courseRepository.findById(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
 
-		return new CourseResource(course);
+		return new CourseResource(course, rest1ServiceEurekaLinkCreator);
 	}
 
 	/**
@@ -132,8 +137,8 @@ public class CourseRestController {
 		Course course = this.courseService.addCourse(input);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setLocation(linkTo( methodOn(CourseRestController.class, course.getId()).getCourse(course.getId()) ).toUri() );
-//		httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(course.getId()).toUri());
+		httpHeaders.setLocation(linkTo(methodOn(CourseRestController.class, course.getId()).getCourse(course.getId())).toUri());
+		// httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(course.getId()).toUri());
 
 		return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
 	}
