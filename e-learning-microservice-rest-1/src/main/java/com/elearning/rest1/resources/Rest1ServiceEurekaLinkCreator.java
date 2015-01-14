@@ -3,11 +3,11 @@ package com.elearning.rest1.resources;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.DiscoveryClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Component
 public class Rest1ServiceEurekaLinkCreator {
@@ -21,10 +21,11 @@ public class Rest1ServiceEurekaLinkCreator {
 		this.discoveryClient = discoveryClient;
 	}
 
-	public Link defaultRest1Link() {
-		return null;
+	public String defaultServerUri() {
+		return "blablabla defualt server uri"; // TODO: implement a real solution.
 	}
 
+	@HystrixCommand( fallbackMethod = "defaultServerUri" )
 	public String getServerUri() {
 		InstanceInfo instanceInfo = discoveryClient.getNextServerFromEureka(rest1ServiceName, false);
 		URI baseUri = URI.create(instanceInfo.getHomePageUrl());

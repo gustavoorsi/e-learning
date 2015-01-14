@@ -6,3 +6,8 @@ spring:
     config:
       server:
         uri: ${conf:https://github.com/gustavoorsi/e-learning-spring-config-properties}
+        
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:9090}/eureka/

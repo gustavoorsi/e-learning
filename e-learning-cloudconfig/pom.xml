@@ -20,7 +20,7 @@
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-server</artifactId>
@@ -29,7 +29,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
+
+		<!-- automatic discovery service lib. Note that eureka lib has actuator 
+			lib as a dependency but we explicitly declare it because cloud-config-client 
+			needs it as well (if we decide to remove eureka lib then cloud-config-client 
+			will still have the lib.). -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+
 	</dependencies>
 
 </project>
