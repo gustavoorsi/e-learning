@@ -38,7 +38,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
-		<!-- lib to centralized all config properties in the cloud under the project 
+		<!-- lib to centralize all config properties in the cloud under the project 
 			e-learning-cloudconfig. I'm saving the server port number for this microservice 
 			so e-learning-cloudconfig should be run first. -->
 		<dependency>
@@ -49,6 +49,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- automatic discovery service lib -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 	</dependencies>
 

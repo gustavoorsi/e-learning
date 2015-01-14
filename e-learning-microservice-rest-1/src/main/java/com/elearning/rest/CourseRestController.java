@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -40,7 +42,7 @@ public class CourseRestController {
 	// *************************************************************//
 	// *********************** PROPERTIES **************************//
 	// *************************************************************//
-	
+
 	@Autowired
 	private CourseService courseService;
 
@@ -74,8 +76,7 @@ public class CourseRestController {
 
 		return new CourseResources(courseResources);
 	}
-	
-	
+
 	/**
 	 * Just a stupid method to show the use of lambda expression/statements.
 	 * 
@@ -83,6 +84,8 @@ public class CourseRestController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = "filterByLessonCount")
+	@Bean
+	@RefreshScope
 	public CourseResources getAllWithMoreThan2Lessons(
 			@RequestParam(defaultValue = "2", value = "filterByLessonCount") int filterByLessonCount) {
 
@@ -114,7 +117,7 @@ public class CourseRestController {
 	}
 
 	/**
-	 * Add a new course only if there is no other with the same topic. 
+	 * Add a new course only if there is no other with the same topic.
 	 * 
 	 * @param input
 	 * @return a 201 response code and the new resource uri or a <code>HttpStatus.FORBIDDEN</code> in case the course already exist.

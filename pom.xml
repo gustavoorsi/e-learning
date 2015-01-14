@@ -24,6 +24,7 @@
 		<module>e-learning-microservice-rest-1</module>
 		<module>e-learning-microservice-rest-2</module>
 		<module>e-learning-microservice-rest-3</module>
+		<module>e-learning-service-discovery-eureka</module>
 		<module>e-learning-service</module>
 		<module>e-learning-cloudconfig</module>
 	</modules>

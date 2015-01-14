@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.RestApplication</config>
+		<config>java:com.MicroServiceRest3Application</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
