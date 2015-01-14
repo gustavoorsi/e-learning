@@ -1,5 +1,8 @@
 package com.elearning.rest1;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,8 +31,6 @@ import com.elearning.rest1.resources.CourseResource;
 import com.elearning.rest1.resources.CourseResources;
 import com.elearning.service.CourseService;
 import com.elearning.service.LessonService;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * 
  * Rest endpoint that handles all course related actions.
@@ -124,6 +126,7 @@ public class CourseRestController {
 	 * @return a 201 response code and the new resource uri or a <code>HttpStatus.FORBIDDEN</code> in case the course already exist.
 	 */
 	@RequestMapping(method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	ResponseEntity<?> add(@RequestBody Course input) {
 
 		Course course = this.courseService.addCourse(input);
@@ -143,6 +146,7 @@ public class CourseRestController {
 	 * @return a 201 response code and the new resource uri or a <code>HttpStatus.NOT_FOUND</code> in case the course does not exist.
 	 */
 	@RequestMapping(value = "/{courseId}/lesson", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	ResponseEntity<?> addLesson(@PathVariable Long courseId, @RequestBody Lesson input) {
 
 		Lesson lesson = this.lessonService.addLesson(courseId, input);
