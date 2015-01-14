@@ -1,4 +1,4 @@
-package com.elearning.rest;
+package com.elearning.rest1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ import com.elearning.model.Lesson;
 import com.elearning.model.LessonStep;
 import com.elearning.persistence.jparepositories.LessonRepository;
 import com.elearning.persistence.jparepositories.LessonStepRepository;
-import com.elearning.rest.resources.LessonResource;
-import com.elearning.rest.resources.LessonResources;
-import com.elearning.rest.resources.LessonStepResource;
+import com.elearning.rest1.resources.LessonResource;
+import com.elearning.rest1.resources.LessonResources;
+import com.elearning.rest1.resources.LessonStepResource;
 
 /**
  * 

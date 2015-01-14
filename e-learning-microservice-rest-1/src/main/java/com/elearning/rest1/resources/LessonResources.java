@@ -1,4 +1,4 @@
-package com.elearning.rest.resources;
+package com.elearning.rest1.resources;
 
 import java.util.List;
 

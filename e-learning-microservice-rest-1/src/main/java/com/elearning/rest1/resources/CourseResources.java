@@ -1,4 +1,4 @@
-package com.elearning.rest.resources;
+package com.elearning.rest1.resources;
 
 import java.util.List;
 
@@ -15,19 +15,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class LessonResources {
+public class CourseResources {
 
-	private List<LessonResource> lessons;
+	private List<CourseResource> courses;
 
-	private LessonResources() {
+	private CourseResources() {
 	}
 
-	public LessonResources(List<LessonResource> lessons) {
-		this.lessons = lessons;
+	public CourseResources(List<CourseResource> courses) {
+		this.courses = courses;
 	}
 
-	public List<LessonResource> getLessons() {
-		return lessons;
+	public List<CourseResource> getCourses() {
+		return courses;
 	}
 	
 	

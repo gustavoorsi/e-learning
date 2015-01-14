@@ -1,4 +1,4 @@
-package com.elearning.rest.resources;
+package com.elearning.rest1.resources;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.elearning.model.Course;
-import com.elearning.rest.CourseRestController;
+import com.elearning.rest1.CourseRestController;
 
 /**
  * Wrapper for Course. Here we add some useful links.
