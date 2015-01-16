@@ -30,7 +30,7 @@ public class Rest2Controller {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String getFoo() {
-		return "foo - testing commit to git, trigger jenkins and finally make jenkins to set automatically build status on git.";
+		return "foo - testing commit to git, trigger jenkins and finally make jenkins to set automatically build status on git";
 	}
 
 }
