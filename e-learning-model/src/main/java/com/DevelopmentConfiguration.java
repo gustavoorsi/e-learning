@@ -7,17 +7,20 @@ import org.springframework.context.annotation.Configuration;
 import com.elearning.model.Course;
 import com.elearning.model.Lesson;
 import com.elearning.model.LessonStep;
+import com.elearning.model.User;
 import com.elearning.persistence.jparepositories.CourseRepository;
 import com.elearning.persistence.jparepositories.LessonRepository;
 import com.elearning.persistence.jparepositories.LessonStepRepository;
+import com.elearning.persistence.jparepositories.UserRepository;
 
 @Configuration
-//@Profile("development")
+// @Profile("development")
 public class DevelopmentConfiguration {
 
 	// populate db with some test date.
 	@Bean
-	CommandLineRunner init(LessonStepRepository lessonStepRepository, LessonRepository lessonRepository, CourseRepository courseRepository) {
+	CommandLineRunner init(LessonStepRepository lessonStepRepository, LessonRepository lessonRepository, CourseRepository courseRepository,
+			UserRepository userRepository) {
 
 		return (evt) -> {
 
@@ -48,7 +51,22 @@ public class DevelopmentConfiguration {
 
 			courseRepository.save(courseTwo);
 
+			// ///////////////////////////////////////////////////////////////////
+
+			User user = new User();
+			user.setFirstName("Gustavo");
+			user.setLastName("Orsi");
+			user.setUsername("gustavoorsi");
+			user.setPassword("123456");
+
+			userRepository.save(user);
+
+			user.setFirstName("David");
+			user.setLastName("Silver");
+			user.setUsername("david1");
+			user.setPassword("654321");
+
+			userRepository.save(user);
 		};
 	}
-
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.elearning</groupId>
+		<artifactId>e-learning-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<packaging>jar</packaging>
+	<name>e-learning-web</name>
+	<description>Web project.</description>
+	<artifactId>e-learning-web</artifactId>
+
+	<properties>
+		<main.basedir>${basedir}/..</main.basedir>
+		<org.thymeleaf.extras.tiles2-version>2.1.1.RELEASE</org.thymeleaf.extras.tiles2-version>
+		<jstl.version>1.2</jstl.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.elearning</groupId>
+			<artifactId>e-learning-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.elearning</groupId>
+			<artifactId>e-learning-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<!-- Thymeleaf dependency -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
+		</dependency>
+		
+		<!-- WebJars: bootstrap and jquery webjar artifacts are managed in org.springframework.cloud:spring-cloud-netflix:1.0.0.M2. 
+			Nevertheless it's a good idea to explicitly declare them here beuuase even 
+			if we decide to get rid of netflix jar we still want to keep these webjars 
+			for our ui. -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+		</dependency>
+
+		<dependency>
+			<!-- lib to centralize all config properties in the cloud under the project 
+				e-learning-cloudconfig. I'm saving the server port number for this microservice 
+				so e-learning-cloudconfig should be run first. -->
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-client</artifactId>
+		</dependency>
+		<dependency>
+			<!-- Actuator endpoints allow you to monitor and interact with your application. 
+				Nevertheless we need it for cloud config in order to set the module name 
+				in bootstrap.yml -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<!-- automatic discovery service lib. Note that eureka lib has actuator 
+				lib as a dependency but we explicitly declare it because cloud-config-client 
+				needs it as well (if we decide to remove eureka lib then cloud-config-client 
+				will still have the lib.). -->
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+		<dependency>
+			<!-- Hystrix is a latency and fault tolerance library designed to isolate 
+				points of access to remote systems, services and 3rd party libraries, stop 
+				cascading failure and enable resilience in complex distributed systems where 
+				failure is inevitable. -->
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>
