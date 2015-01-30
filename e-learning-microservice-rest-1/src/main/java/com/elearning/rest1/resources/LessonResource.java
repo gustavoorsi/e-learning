@@ -5,8 +5,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import com.elearning.model.Lesson;
-import com.elearning.rest1.LessonRestController;
+import com.elearning.model.entities.Lesson;
+import com.elearning.rest1.endpoints.LessonRestController;
 
 /**
  * Wrapper for Lesson. Here we add some useful links.

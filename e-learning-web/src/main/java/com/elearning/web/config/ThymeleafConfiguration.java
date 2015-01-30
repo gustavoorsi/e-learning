@@ -29,7 +29,8 @@ public class ThymeleafConfiguration {
 	public SpringTemplateEngine templateEngine() {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 		templateEngine.setTemplateResolver(templateResolver());
-		templateEngine.addDialect(new LayoutDialect()); // Dialect that understand sintax like: layout:decorator or layout:fragment, etc.
+		templateEngine.addDialect(new LayoutDialect()); // Dialect that understand syntax like: layout:decorator or layout:fragment, etc.
+//		templateEngine.addDialect(new SpringSecurityDialect()); // Dialect that understand security syntax.
 		return templateEngine;
 	}
 	

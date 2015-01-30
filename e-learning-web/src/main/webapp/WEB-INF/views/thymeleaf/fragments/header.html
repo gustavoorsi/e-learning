@@ -1,20 +1,40 @@
-
-<!-- Navbar -->
-<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">My project</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#" th:href="@{/}">Home</a></li>
-            </ul>
-        </div>
-        <!--/.nav-collapse -->
-    </div>
-</div>
+<!DOCTYPE html>
+<html>
+	<head>
+	    <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
+	    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Layout title</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	    <link href="../../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+	    <link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+	    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	    <script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+	</head>
+	<body>
+	
+		<!-- Navbar -->
+		<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+		    <div class="container">
+		        <div class="navbar-header">
+		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		            </button>
+		            <a class="navbar-brand" href="#">E-Learning</a>
+		        </div>
+		        <div class="navbar-collapse collapse">
+		            <ul class="nav navbar-nav">
+		                <li th:classappend="${page == 'home' ? 'active' : ''}"><a href="#" th:href="@{/}">Home</a></li>
+		                <li th:classappend="${page == 'courses' ? 'active' : ''}"><a href="#" th:href="@{/courses}">Courses</a></li>
+		            </ul>
+		            <ul class="nav navbar-nav navbar-right">
+<!-- 		                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/signin" th:href="@{/signin}">Sign in</a></li> -->
+<!-- 		                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}">Logout</a></li> -->
+		            </ul>
+		        </div>
+		        <!--/.nav-collapse -->
+		    </div>
+		</div>
+	
+	</body>
+</html>

@@ -1,7 +1,7 @@
 package com.elearning.service;
 
-import com.elearning.exception.CourseNotFoundException;
-import com.elearning.model.Lesson;
+import com.elearning.model.entities.Lesson;
+import com.elearning.model.exception.CourseNotFoundException;
 
 public interface LessonService {
 

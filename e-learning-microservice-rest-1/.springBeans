@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.MicroserviceRest1Application</config>
+		<config>java:com.elearning.rest1.config.RootApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

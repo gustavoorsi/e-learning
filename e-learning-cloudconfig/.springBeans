@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.ELearningCloudconfigApplication</config>
+		<config>java:com.elearning.cloudconfig.config.RootApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

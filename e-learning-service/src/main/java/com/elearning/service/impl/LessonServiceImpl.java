@@ -5,11 +5,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.elearning.exception.CourseNotFoundException;
-import com.elearning.model.Course;
-import com.elearning.model.Lesson;
-import com.elearning.persistence.jparepositories.CourseRepository;
-import com.elearning.persistence.jparepositories.LessonRepository;
+import com.elearning.model.entities.Course;
+import com.elearning.model.entities.Lesson;
+import com.elearning.model.exception.CourseNotFoundException;
+import com.elearning.model.persistence.jparepositories.CourseRepository;
+import com.elearning.model.persistence.jparepositories.LessonRepository;
 import com.elearning.service.LessonService;
 
 /**

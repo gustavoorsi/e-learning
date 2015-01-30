@@ -5,10 +5,10 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.MicroServiceRest3Application;
+import com.elearning.rest3.config.RootApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MicroServiceRest3Application.class)
+@SpringApplicationConfiguration(classes = RootApplication.class)
 public class ELearningRestApplicationTests {
 
 	@Test

@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
-import com.elearning.model.Course;
+import com.elearning.model.entities.Course;
 
 /**
  * Wrapper for Course. Here we add some useful links.

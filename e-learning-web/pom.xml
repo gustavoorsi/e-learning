@@ -35,7 +35,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<!-- Thymeleaf dependency -->
 			<groupId>org.springframework.boot</groupId>
@@ -45,7 +44,7 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
 		</dependency>
-		
+
 		<!-- WebJars: bootstrap and jquery webjar artifacts are managed in org.springframework.cloud:spring-cloud-netflix:1.0.0.M2. 
 			Nevertheless it's a good idea to explicitly declare them here beuuase even 
 			if we decide to get rid of netflix jar we still want to keep these webjars 

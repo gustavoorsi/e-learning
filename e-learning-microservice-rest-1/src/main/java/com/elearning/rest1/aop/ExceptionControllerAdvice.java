@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.elearning.exception.CourseTopicAlreadyExistException;
-import com.elearning.exception.EntityNotFoundException;
+import com.elearning.model.exception.CourseTopicAlreadyExistException;
+import com.elearning.model.exception.EntityNotFoundException;
 
 //@formatter:off
 /**

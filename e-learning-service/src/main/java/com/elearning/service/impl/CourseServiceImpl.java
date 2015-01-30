@@ -1,13 +1,15 @@
 package com.elearning.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.elearning.exception.CourseTopicAlreadyExistException;
-import com.elearning.model.Course;
-import com.elearning.persistence.jparepositories.CourseRepository;
+import com.elearning.model.entities.Course;
+import com.elearning.model.exception.CourseTopicAlreadyExistException;
+import com.elearning.model.persistence.jparepositories.CourseRepository;
 import com.elearning.service.CourseService;
 
 /**
@@ -51,5 +53,16 @@ public class CourseServiceImpl implements CourseService {
 
 		return course;
 	}
+	
+	/**
+	 * 
+	 * Return all courses.
+	 * 
+	 */
+	@Override
+	public List<Course> findAll(){
+		return this.courseRepository.findAll();
+	}
+	
 
 }

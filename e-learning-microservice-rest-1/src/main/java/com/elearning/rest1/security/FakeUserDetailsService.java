@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.elearning.model.User;
-import com.elearning.persistence.jparepositories.UserRepository;
+import com.elearning.model.entities.User;
+import com.elearning.model.persistence.jparepositories.UserRepository;
 
 @Service
 public class FakeUserDetailsService implements UserDetailsService {
