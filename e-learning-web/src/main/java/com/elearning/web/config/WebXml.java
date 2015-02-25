@@ -14,7 +14,8 @@ import com.RootApplication;
  * This extension offers many configurable options by overriding methods, but one required method is configure().
  * 
  * The configure() method provides the means to register the classes that are needed to launch the application. This is where you supply a
- * handle to your Application configuration. Remember: RootApplication has the @ComponentScan, so it will find the web controller automatically.
+ * handle to your Application configuration. Remember: RootApplication has the @ComponentScan, so it will find the web controller
+ * automatically.
  * 
  * 
  * @author Gustavo Orsi

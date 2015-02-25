@@ -47,6 +47,12 @@
 			failure is inevitable. -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+		</dependency>
+		<!-- The Hystrix Dashboard enables realtime monitoring of Hystrix metrics. 
+			More info at https://github.com/Netflix/Hystrix/wiki/Dashboard. http://localhost:7979/hystrix-dashboard -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 		</dependency>
 

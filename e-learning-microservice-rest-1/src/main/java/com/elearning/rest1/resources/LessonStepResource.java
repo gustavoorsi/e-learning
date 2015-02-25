@@ -1,12 +1,8 @@
 package com.elearning.rest1.resources;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.Resource;
 
 import com.elearning.model.entities.LessonStep;
-import com.elearning.rest1.endpoints.LessonRestController;
 
 /**
  * Wrapper for LessonStep. Here we add some useful links.
@@ -14,18 +10,10 @@ import com.elearning.rest1.endpoints.LessonRestController;
  * @author Gustavo Orsi
  *
  */
-public class LessonStepResource extends ResourceSupport {
+public class LessonStepResource extends Resource<LessonStep> {
 
-	private final LessonStep lessonStep;
-
-	public LessonStepResource(LessonStep lessonStep) {
-		this.lessonStep = lessonStep;
-		this.add(linkTo(methodOn(LessonRestController.class).getLessonStep(lessonStep.getLesson().getId(), lessonStep.getId()))
-				.withSelfRel());
-	}
-
-	public LessonStep getLessonStep() {
-		return lessonStep;
+	public LessonStepResource(LessonStep content) {
+		super(content);
 	}
 
 }

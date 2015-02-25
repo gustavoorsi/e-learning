@@ -16,6 +16,7 @@
 
 	<properties>
 		<main.basedir>${basedir}/..</main.basedir>
+		<jsonpath.version>0.9.0</jsonpath.version>
 	</properties>
 
 
@@ -66,12 +67,47 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
 		</dependency>
-		<!-- adding spring security lib -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+		</dependency>
+		<!-- adding spring security lib -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-security</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.fasterxml.jackson.dataformat</groupId> -->
+		<!-- <artifactId>jackson-dataformat-xml</artifactId> -->
+		<!-- <version>2.4.0</version> -->
+		<!-- </dependency> -->
+
+
+
+		<dependency>
+			<!-- A Java DSL for reading JSON documents -->
+			<!-- JsonPath expressions always refer to a JSON structure in the same 
+				way as XPath expression are used in combination with an XML document. The 
+				"root member object" in JsonPath is always referred to as $ regardless if 
+				it is an object or array. JsonPath expressions can use the dot–notation $.store.book[0].title 
+				or the bracket–notation $['store']['book'][0]['title'] -->
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>${jsonpath.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path-assert</artifactId>
+			<version>${jsonpath.version}</version>
+			<scope>test</scope>
 		</dependency>
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-security</artifactId> -->
+<!-- 		</dependency> -->
 	</dependencies>
 
 </project>

@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html layout:decorator="layouts/basic_layout">
-<head>
-	<title>Home</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="../../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}" />
-	<link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
-</head>
-<body>
 
-	<!--/* Content of this page will be decorated by the elements of basic_layout.html (layouts/basic_layout) */-->
-	<div layout:fragment="content">
+<html layout:decorator="layouts/basic_layout" lan="en">
+	<head>
+		<title>Home</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+	</head>
 
-		<div class="hero-unit">
-			<h1>E-Learning</h1>
-			<p>
-				Welcome to the e-learning application!
-			</p>
+	<body class="body">
+	
+		<!--/* Content of this page will be decorated by the elements of basic_layout.html (layouts/basic_layout) */-->
+		<div layout:fragment="content">
+		
+			<article class="topContent">
+				<header>
+					<h2>E-Learning</h2>
+				</header>
+				<footer>
+					<p class="post-info">Welcome to the e-learning application!</p>
+				</footer>
+				<content>
+					<p>
+						Welcome to the e-learning application!
+					</p>
+				</content>					
+			</article>
 		</div>
-
-	</div>
-</body>
+		
+	</body>
+	
 </html>

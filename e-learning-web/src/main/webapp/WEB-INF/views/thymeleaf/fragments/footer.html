@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 	<head>
 	    <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
 	    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Layout title</title>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	    <link href="../../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
 	    <link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
 	    <script src="http://code.jquery.com/jquery-latest.js"></script>
 	    <script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 	</head>
-	<body>
-	
+	<body class="body">
 		<!--/*  Multiple fragments may be defined in one file */-->
-	    <div th:fragment="footer">
-	        &copy; 2014 E-Learning
-	    </div>
-	    <div th:fragment="footer-admin">
-	        &copy; 2014 E-Learnging Admin
-	    </div>
-	
+	    <footer class="mainFooter" th:fragment="footer">
+	        <p>&copy; 2014 E-Learning</p>
+	    </footer>
+<!-- 	    <footer class="mainFooter" th:fragment="footer-admin"> -->
+<!-- 	        <p>&copy; 2014 E-Learnging Admin</p> -->
+<!-- 	    </footer> -->
 	</body>
+	
 </html>
 

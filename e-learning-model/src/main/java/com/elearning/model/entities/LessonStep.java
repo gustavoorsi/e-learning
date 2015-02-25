@@ -5,10 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,19 +15,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author Gustavo Orsi
  *
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class LessonStep {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@Column
 	private String content;
-	
-	@XmlTransient
+
 	@JsonIgnore
 	@ManyToOne
 	private Lesson lesson;
@@ -74,8 +67,8 @@ public class LessonStep {
 
 	@Override
 	public String toString() {
-		return new StringBuilder().append("ID[").append(this.id).append("], lesson[").append(this.lesson.getLessonName())
-				.append("], content[").append(this.content).append("].").toString();
+		return new StringBuilder().append("ID[").append(this.id).append("], lesson[").append(this.lesson.getLessonName()).append("], content[")
+				.append(this.content).append("].").toString();
 	}
 
 }

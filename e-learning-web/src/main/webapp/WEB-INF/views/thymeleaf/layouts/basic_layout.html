@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 	<head>
 	    <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
 	    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Layout title</title>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	    <link href="../../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
 	    <link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
 	    <script src="http://code.jquery.com/jquery-latest.js"></script>
 	    <script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 	</head>
-	<body>
+
+	
+	<body class="body">
+
 		<!--/* Standard layout can be mixed with Layout Dialect */-->
 		<div th:replace="fragments/header :: header">
 		    <!-- ============================================================================ -->
@@ -17,38 +21,120 @@
 		    <!-- and is therefore entirely optional, as this markup fragment will be included -->
 		    <!-- from "fragments/header.html" at runtime.                                     -->
 		    <!-- ============================================================================ -->
-		    <div class="navbar navbar-inverse navbar-fixed-top">
-		        <div class="container">
-		            <div class="navbar-header">
-		                <a class="navbar-brand" href="#">Static header</a>
-		            </div>
-		            <div class="navbar-collapse collapse">
-		                <ul class="nav navbar-nav">
-		                    <li class="active"><a href="#">Home</a></li>
-		                </ul>
-		            </div>
-		        </div>
-		    </div>
+
+			<header class="mainHeader">
+			
+				<img src="../../../../resources/images/courses.jpg"/>
+
+				<nav>
+					<ul>
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Courses</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</nav>
+				
+			</header>
+		    
 		</div>
-		<div class="container">
+		
+		
+		<div class="mainContent">
 		    <div layout:fragment="content">
 		        <!-- ============================================================================ -->
 		        <!-- This content is only used for static prototyping purposes (natural templates)-->
 		        <!-- and is therefore entirely optional, as this markup fragment will be included -->
 		        <!-- from "fragments/header.html" at runtime.                                     -->
 		        <!-- ============================================================================ -->
-		        <h1>Static content for prototyping purposes only</h1>
-		        <p>
-		            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		            Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
-		            Phasellus et placerat elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		            Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
-		            Phasellus et placerat elit.
-		        </p>
-		
-		    </div>
-<!-- 		    <div th:replace="fragments/footer :: ${#authentication.principal.isAdmin()} ? 'footer-admin' : 'footer'">&copy; 2014 The Static Templates</div> -->
-<div th:replace="fragments/footer :: footer">&copy; 2014 The Static Templates</div>
+			
+				<article class="topContent">
+					<header>
+						<h2>List of courses (by Thymeleaf)</h2>
+					</header>
+					<footer>
+						<p class="post-info">This is a list of courses loaded in web module and displayed with Thymeleaf.</p>
+					</footer>
+					<content>
+						<ul>
+							<li><a href="#">Course 1</a></li>
+							<li><a href="#">Course 2</a></li>
+							<li><a href="#">Course 3</a></li>
+							<li><a href="#">Course 4</a></li>
+						</ul>
+					</content>					
+				</article>
+				
+				<article class="middleContent">
+					<header>
+						<h2>List of courses (by Rest)</h2>
+					</header>
+					<footer>
+						<p class="post-info">This is a list of courses loaded by a Rest call to the rest endpoint.</p>
+					</footer>
+					
+					<content>
+						<ul>
+							<li><a href="#">Course 1</a></li>
+							<li><a href="#">Course 2</a></li>
+							<li><a href="#">Course 3</a></li>
+							<li><a href="#">Course 4</a></li>
+						</ul>
+					</content>
+				</article>
+				
+				<article class="bottomContent">
+					<header>
+						<h2>Add new Course</h2>
+					</header>
+					<footer>
+						<p class="post-info">Add a new course.</p>
+					</footer>
+					<content>
+						<form action="#" method="post">
+							<div>
+								<label for="courseTopic"><span>Course Topic</span></label> 
+								<input type="text" />
+							</div>
+							<div class="submit">
+								<button type="submit" name="add">Add Course</button>
+							</div>
+						</form>
+					</content>
+				</article>
+			</div>
 		</div>
+		
+		<aside class="top-sidebar">
+			<article>
+				<h2>Top Sidebar</h2>
+				<p>
+					bla bla bla
+				</p>
+			</article>
+		</aside>
+			
+		<aside class="middle-sidebar">
+			<article>
+				<h2>Top Sidebar</h2>
+				<p>
+					bla bla bla
+				</p>
+			</article>
+		</aside>
+		
+		<aside class="bottom-sidebar">
+			<article>
+				<h2>Top Sidebar</h2>
+				<p>
+					bla bla bla
+				</p>
+			</article>
+		</aside>
+		
+		<footer class="mainFooter" th:replace="fragments/footer :: footer">
+			<p>Copyright &copy; blablabla.com</p>
+		</footer>
+
 	</body>
 </html>

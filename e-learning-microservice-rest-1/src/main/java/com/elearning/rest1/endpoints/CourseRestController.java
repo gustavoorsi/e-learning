@@ -3,34 +3,31 @@ package com.elearning.rest1.endpoints;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.elearning.model.entities.Course;
 import com.elearning.model.entities.Lesson;
-import com.elearning.model.exception.CourseNotFoundException;
-import com.elearning.model.persistence.jparepositories.CourseRepository;
-import com.elearning.model.persistence.jparepositories.LessonRepository;
 import com.elearning.rest1.resources.CourseResource;
-import com.elearning.rest1.resources.CourseResources;
-import com.elearning.rest1.resources.Rest1ServiceEurekaLinkCreator;
+import com.elearning.rest1.resources.LessonResource;
+import com.elearning.rest1.resources.assemblers.CourseResourceAssembler;
+import com.elearning.rest1.resources.assemblers.LessonResourceAssembler;
 import com.elearning.service.CourseService;
 import com.elearning.service.LessonService;
 
@@ -56,58 +53,44 @@ public class CourseRestController {
 	private LessonService lessonService;
 
 	@Autowired
-	private CourseRepository courseRepository;
+	private CourseResourceAssembler courseResourceAssembler;
 
 	@Autowired
-	private LessonRepository lessonRepository;
-
-	@Autowired
-	private Rest1ServiceEurekaLinkCreator rest1ServiceEurekaLinkCreator;
+	private LessonResourceAssembler lessonResourceAssembler;
 
 	// *************************************************************//
 	// ********************* REST SERVICES *************************//
 	// *************************************************************//
 
 	/**
-	 * Return a list of <code>CourseResourse</code> instances wrapped in a <code>CourseResources</code> object.
+	 * Return a "Page" of <code>CourseResourse</code>.
 	 * 
-	 * @return a <code>CourseResoureces</code> instance containing all courses.
+	 * @return a Page of <code>CourseResourece</code> instance containing all courses.
 	 */
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
-	public CourseResources getAll() {
+	public HttpEntity<PagedResources<CourseResource>> getAll(//
+			@PageableDefault(size = 10, page = 0) Pageable pageable, //
+			PagedResourcesAssembler<Course> assembler//
+	) {
 
-		List<CourseResource> courseResources = new ArrayList<CourseResource>();
+		Page<Course> courses = this.courseService.findAll(pageable);
 
-		List<Course> courses = this.courseRepository.findAll();
-
-		// using lambda to wrap courses into CourseResource.
-		courses.stream().map(p -> new CourseResource(p, rest1ServiceEurekaLinkCreator)).forEach(p -> courseResources.add(p));
-
-		return new CourseResources(courseResources);
+		return new ResponseEntity<>(assembler.toResource(courses, this.courseResourceAssembler), HttpStatus.OK);
 	}
 
-	/**
-	 * Just a stupid method to show the use of lambda expression/statements.
-	 * 
-	 * @param filterByLessonCount
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET, params = "filterByLessonCount")
-	@Bean
-	@RefreshScope
-	public CourseResources getAllWithMoreThanNLessons(
-			@RequestParam(defaultValue = "2", value = "filterByLessonCount") int filterByLessonCount) {
+	
+	@RequestMapping(value = "/{courseId}/lessons",  method = RequestMethod.GET)
+	public HttpEntity<PagedResources<LessonResource>> getLessonsForCourse( //
+			@PathVariable Long courseId, //
+			@PageableDefault(size = 10, page = 0) Pageable pageable, //
+			PagedResourcesAssembler<Lesson> assembler//
+	) {
 
-		List<CourseResource> courseResources = new ArrayList<CourseResource>();
+		Course course = this.courseService.findById(courseId);
 
-		List<Course> courses = this.courseRepository.findAll();
+		Page<Lesson> lessons = this.lessonService.findByCourse(course, pageable);
 
-		// using lambda to wrap courses into CourseResource and filter out those that don't comply with the requirement.
-		courses.stream().filter(p -> (p.getLessons().size() > filterByLessonCount))
-				.map(p -> new CourseResource(p, rest1ServiceEurekaLinkCreator)).forEach(p -> courseResources.add(p));
-
-		return new CourseResources(courseResources);
+		return new ResponseEntity<PagedResources<LessonResource>>(assembler.toResource(lessons, this.lessonResourceAssembler), HttpStatus.OK);
 	}
 
 	/**
@@ -118,12 +101,12 @@ public class CourseRestController {
 	 * @return a <code>CourseResource</code>
 	 */
 	@RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
-	public CourseResource getCourse(@PathVariable Long courseId) {
+	public HttpEntity<CourseResource> getCourse(//
+			@PathVariable Long courseId//
+	) {
 
-		// note: courseRepository returns an Option instance, so we can use the utility method .orElseThrow() and lambda expression.
-		Course course = this.courseRepository.findById(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
-
-		return new CourseResource(course, rest1ServiceEurekaLinkCreator);
+		Course course = this.courseService.findById(courseId);
+		return new ResponseEntity<CourseResource>(this.courseResourceAssembler.toResource(course), HttpStatus.OK);
 	}
 
 	/**
@@ -134,15 +117,14 @@ public class CourseRestController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	ResponseEntity<?> add(@RequestBody Course input) {
+	public HttpEntity<?> add(@RequestBody Course input) {
 
 		Course course = this.courseService.addCourse(input);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(linkTo(methodOn(CourseRestController.class, course.getId()).getCourse(course.getId())).toUri());
-		// httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(course.getId()).toUri());
 
-		return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
 	}
 
 	/**
@@ -154,19 +136,17 @@ public class CourseRestController {
 	 */
 	@RequestMapping(value = "/{courseId}/lesson", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	ResponseEntity<?> addLesson(@PathVariable Long courseId, @RequestBody Lesson input) {
+	public HttpEntity<?> addLesson(@PathVariable Long courseId, @RequestBody Lesson input) {
 
 		Lesson lesson = this.lessonService.addLesson(courseId, input);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 
-		String href = ControllerLinkBuilder
-				.linkTo(ControllerLinkBuilder.methodOn(LessonRestController.class, lesson.getId()).getLesson(lesson.getId())).withSelfRel()
-				.getHref();
+		String href = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(LessonRestController.class, lesson.getId()).getLesson(lesson.getId()))
+				.withSelfRel().getHref();
 		httpHeaders.setLocation(ServletUriComponentsBuilder.fromPath(href).build().toUri());
-		// httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(lesson.getId()).toUri());
 
-		return new ResponseEntity<>(null, httpHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
 	}
 
 }

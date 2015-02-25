@@ -1,9 +1,14 @@
 package com.elearning.rest1.endpoints;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,13 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.elearning.model.entities.Lesson;
 import com.elearning.model.entities.LessonStep;
-import com.elearning.model.exception.EntityNotFoundException;
-import com.elearning.model.exception.LessonNotFoundException;
-import com.elearning.model.persistence.jparepositories.LessonRepository;
-import com.elearning.model.persistence.jparepositories.LessonStepRepository;
 import com.elearning.rest1.resources.LessonResource;
-import com.elearning.rest1.resources.LessonResources;
 import com.elearning.rest1.resources.LessonStepResource;
+import com.elearning.rest1.resources.assemblers.LessonResourceAssembler;
+import com.elearning.rest1.resources.assemblers.LessonStepResourceAssembler;
+import com.elearning.service.LessonService;
+import com.elearning.service.LessonStepService;
 
 /**
  * 
@@ -35,10 +39,16 @@ public class LessonRestController {
 	// *************************************************************//
 
 	@Autowired
-	private LessonStepRepository lessonStepRepository;
+	private LessonService lessonService;
 
 	@Autowired
-	private LessonRepository lessonRepository;
+	private LessonStepService lessonStepService;
+
+	@Autowired
+	private LessonResourceAssembler lessonResourceAssembler;
+
+	@Autowired
+	private LessonStepResourceAssembler lessonStepResourceAssembler;
 
 	// *************************************************************//
 	// ********************* REST SERVICES *************************//
@@ -52,11 +62,13 @@ public class LessonRestController {
 	 * @return a LessonResource if the lesson was found or a 404 status code with "lesson not found" message.
 	 */
 	@RequestMapping(value = "/{lessonId}", method = RequestMethod.GET)
-	public LessonResource getLesson(@PathVariable Long lessonId) {
+	public HttpEntity<LessonResource> getLesson(//
+			@PathVariable Long lessonId//
+	) {
 
-		Lesson lesson = this.lessonRepository.findById(lessonId).orElseThrow(() -> new LessonNotFoundException(lessonId));
+		Lesson lesson = this.lessonService.findById(lessonId);
 
-		return new LessonResource(lesson);
+		return new ResponseEntity<LessonResource>(this.lessonResourceAssembler.toResource(lesson), HttpStatus.OK);
 	}
 
 	/**
@@ -67,13 +79,16 @@ public class LessonRestController {
 	 * @return a LessonResource including the lessonStep if the lesson was found or a 404 status code with "lesson not found" message.
 	 */
 	@RequestMapping(value = "/{lessonId}", params = "includeSteps", method = RequestMethod.GET)
-	public LessonResource getDeepLesson(@PathVariable Long lessonId) {
+	public HttpEntity<LessonResource> getDeepLesson(//
+			@PathVariable Long lessonId//
+	) {
 
-		Lesson l = this.lessonRepository.findByIdAndFetchLessonStepsEagerly(lessonId);
+		Lesson lesson = this.lessonService.findByIdAndFetchLessonStepsEagerly(lessonId);
 
-		return new LessonResource(l);
+		return new ResponseEntity<LessonResource>(this.lessonResourceAssembler.toResource(lesson), HttpStatus.OK);
 	}
-
+	
+	
 	/**
 	 * 
 	 * Get a lessonStep. If lesson is not found return a 404 status code with "lesson not found" message. If lessonStep is not found return
@@ -84,15 +99,15 @@ public class LessonRestController {
 	 * @return a LessonStepResource if the step and lesson are found and if the step belong to the lesson.
 	 */
 	@RequestMapping(value = "/{lessonId}/steps/{lessonStepId}", method = RequestMethod.GET)
-	public LessonStepResource getLessonStep(@PathVariable Long lessonId, @PathVariable Long lessonStepId) {
+	public HttpEntity<LessonStepResource> getLessonStep(//
+			@PathVariable Long lessonId, //
+			@PathVariable Long lessonStepId//
+	) {
 
-		Lesson lesson = this.lessonRepository.findById(lessonId).orElseThrow(() -> new LessonNotFoundException(lessonId));
+		Lesson lesson = this.lessonService.findById(lessonId);
+		LessonStep lessonStep = this.lessonStepService.findByLessonAndId(lesson, lessonStepId);
 
-		LessonStep lessonStep = this.lessonStepRepository.findByLessonAndId(lesson, lessonStepId).orElseThrow(
-				() -> new EntityNotFoundException(lessonStepId));
-		;
-
-		return new LessonStepResource(lessonStep);
+		return new ResponseEntity<LessonStepResource>(this.lessonStepResourceAssembler.toResource(lessonStep), HttpStatus.OK);
 	}
 
 	/**
@@ -101,14 +116,14 @@ public class LessonRestController {
 	 * @return a <code>LessonResources</code> instance containing all the lessons.
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public LessonResources getAllLessons() {
+	public HttpEntity<PagedResources<LessonResource>> getAllLessons(//
+			@PageableDefault(size = 10, page = 0) Pageable pageable, //
+			PagedResourcesAssembler<Lesson> assembler//
+	) {
 
-		List<LessonResource> lessonResources = new ArrayList<LessonResource>();
+		Page<Lesson> lessons = this.lessonService.findAll(pageable);
 
-		// using lambda to wrap courses into CourseResource.
-		this.lessonRepository.findAll().stream().map(p -> new LessonResource(p)).forEach(p -> lessonResources.add(p));
-
-		return new LessonResources(lessonResources);
+		return new ResponseEntity<PagedResources<LessonResource>>(assembler.toResource(lessons, this.lessonResourceAssembler), HttpStatus.OK);
 	}
 
 }

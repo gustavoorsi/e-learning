@@ -1,13 +1,15 @@
 server:
- port: ${vcap.application.port:8888}
+ port: 8888
  
 spring:
+  application:
+    name: CONFIGSERVER
   cloud:
     config:
       server:
-        uri: ${conf:https://github.com/gustavoorsi/e-learning-spring-config-properties}
+        uri: https://github.com/gustavoorsi/e-learning-spring-config-properties
         
 eureka:
  client:
   serviceUrl:
-   defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:9090}/eureka/
+   defaultZone: http://localhost:8761/eureka/
