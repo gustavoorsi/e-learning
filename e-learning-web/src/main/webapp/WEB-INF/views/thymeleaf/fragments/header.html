@@ -2,33 +2,57 @@
 
 <html lang="en">
 
-
 	<head>
-	    <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
-	    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Layout title</title>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
+		<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Layout title</title>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+		<!-- CSS resources -->
 	    <link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
-	    <script src="http://code.jquery.com/jquery-latest.js"></script>
+		<link href="../../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+	    
+		<!-- javascript resources -->
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
 	    <script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+		<script src="../../../../resources/js/knockout.js" th:src="@{/resources/js/knockout.js}"></script>
+		<script src="../../../../resources/js/courseViewModel.js" type="text/javascript"></script>
 	</head>
 	
-	<body class="body">
+	<body>
 	
-		<!-- Navbar -->
-		<header class="mainHeader">
-		
-			<img src="../../../../resources/images/courses.jpg"/>
-
-			<nav>
-				<ul>
-					<li th:classappend="${page == 'home' ? 'active' : ''}"><a href="#" th:href="@{/}">Home</a></li>
-		            <li th:classappend="${page == 'courses' ? 'active' : ''}"><a href="#" th:href="@{/courses}">Courses</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</nav>
+		<!-- header -->
+		<div th:fragment="header">
+			<!-- navbar navbar-default -->
+			<div class="navbar navbar-default" role="navigation">
 			
-		</header>
-
+				<!-- navbar-header -->
+				<div class="navbar-header">
+					
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				
+					<span class="navbar-brand">E-Learning</span>
+				</div><!-- /navbar-header -->
+			
+				<!-- navbar -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li th:classappend="${page == 'home' ? 'active' : ''}"><a href="#" th:href="@{/}">Home</a></li>
+						<li th:classappend="${page == 'courses' ? 'active' : ''}"><a href="#" th:href="@{/courses}">Courses</a></li>
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			
+			</div><!-- /navbar navbar-default -->
+		</div><!-- /header -->
+		
 	</body>
+	
 </html>
