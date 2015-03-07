@@ -30,8 +30,16 @@ public class CourseServiceImpl implements CourseService {
 	// *********************** PROPERTIES **************************//
 	// *************************************************************//
 
+	private final CourseRepository courseRepository;
+	
+	
+	// *************************************************************//
+	// ********************* CONSTRUCTORS **************************//
+	// *************************************************************//
 	@Autowired
-	private CourseRepository courseRepository;
+	public CourseServiceImpl( final CourseRepository courseRepository ) {
+		this.courseRepository = courseRepository;
+	}
 
 	// *************************************************************//
 	// ********************* METHOD SERVICES ***********************//
