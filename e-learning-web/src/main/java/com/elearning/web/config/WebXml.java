@@ -17,6 +17,8 @@ import com.RootApplication;
  * handle to your Application configuration. Remember: RootApplication has the @ComponentScan, so it will find the web controller
  * automatically.
  * 
+ * Remember to package the project as a war file instead of jar.s
+ * 
  * 
  * @author Gustavo Orsi
  *
