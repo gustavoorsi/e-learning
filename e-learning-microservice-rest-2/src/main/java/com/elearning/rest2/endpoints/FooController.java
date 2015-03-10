@@ -1,11 +1,12 @@
 package com.elearning.rest2.endpoints;
 
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.*;
+import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.FOO_ENDPOINT_BASE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,7 @@ public class FooController {
 	 * 
 	 * @return a foo
 	 */
+	@PreAuthorize("hasAuthority('ROLE_DOMAIN_USER')")
 	@RequestMapping(method = RequestMethod.GET)
 	public HttpEntity<FooResource> getFoo() {
 
