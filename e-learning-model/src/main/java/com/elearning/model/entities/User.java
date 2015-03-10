@@ -4,9 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * 
@@ -15,8 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Gustavo Orsi
  *
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class User {
 
@@ -24,10 +19,10 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
-	@Column( name = "first_name" )
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column( name = "last_name" )
+	@Column(name = "last_name")
 	private String lastName;
 
 	@Column
@@ -38,12 +33,12 @@ public class User {
 
 	public User() {
 	}
-	
-	public User( final String username ){
+
+	public User(final String username) {
 		this.username = username;
 	}
-	
-	public User( String username, String password ){
+
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}

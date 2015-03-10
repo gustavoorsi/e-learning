@@ -18,6 +18,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -140,14 +141,19 @@ public class CourseRestController {
 	 */
 	@RequestMapping(value = POST_LESSON_TO_COURSE, method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public HttpEntity<?> addLesson(@PathVariable Long courseId, @RequestBody Lesson input) {
+	public HttpEntity<?> addLesson( //
+			@PathVariable Long courseId, //
+			@RequestBody Lesson input, //
+			@AuthenticationPrincipal org.springframework.security.core.userdetails.User loggedInUser //
+	) {
 
 		Lesson lesson = this.lessonService.addLesson(courseId, input);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 
-		String href = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(LessonRestController.class, lesson.getId()).getLesson(lesson.getId()))
-				.withSelfRel().getHref();
+		String href = ControllerLinkBuilder
+				.linkTo(ControllerLinkBuilder.methodOn(LessonRestController.class, lesson.getId()).getLesson(lesson.getId(), loggedInUser)).withSelfRel()
+				.getHref();
 		httpHeaders.setLocation(ServletUriComponentsBuilder.fromPath(href).build().toUri());
 
 		return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);

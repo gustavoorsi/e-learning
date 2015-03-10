@@ -1,5 +1,8 @@
 package com.elearning.rest1.endpoints;
 
+import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.GET_LESSON;
+import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.LESSONS;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +12,8 @@ import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +36,8 @@ import com.elearning.service.LessonStepService;
  *
  */
 @RestController
-@RequestMapping("/lessons")
+@RequestMapping(LESSONS)
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class LessonRestController {
 
 	// *************************************************************//
@@ -61,10 +67,10 @@ public class LessonRestController {
 	 * @param lessonId
 	 * @return a LessonResource if the lesson was found or a 404 status code with "lesson not found" message.
 	 */
-	@RequestMapping(value = "/{lessonId}", method = RequestMethod.GET)
+	@RequestMapping(value = GET_LESSON, method = RequestMethod.GET)
 	public HttpEntity<LessonResource> getLesson(//
-			@PathVariable Long lessonId//
-	) {
+			@PathVariable Long lessonId, //
+			@AuthenticationPrincipal org.springframework.security.core.userdetails.User loggedInUser) {
 
 		Lesson lesson = this.lessonService.findById(lessonId);
 
@@ -87,8 +93,7 @@ public class LessonRestController {
 
 		return new ResponseEntity<LessonResource>(this.lessonResourceAssembler.toResource(lesson), HttpStatus.OK);
 	}
-	
-	
+
 	/**
 	 * 
 	 * Get a lessonStep. If lesson is not found return a 404 status code with "lesson not found" message. If lessonStep is not found return

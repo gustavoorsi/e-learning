@@ -26,57 +26,65 @@
 			<artifactId>e-learning-model</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.elearning</groupId>
 			<artifactId>e-learning-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
-		<!-- lib to centralize all config properties in the cloud under the project 
-			e-learning-cloudconfig. I'm saving the server port number for this microservice 
-			so e-learning-cloudconfig should be run first. -->
+
 		<dependency>
+			<!-- lib to centralize all config properties in the cloud under the project 
+				e-learning-cloudconfig. I'm saving the server port number for this microservice 
+				so e-learning-cloudconfig should be run first. -->
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-client</artifactId>
 		</dependency>
-		<!-- needed by cloud config in order to set the module name. bootstrap.yml -->
+
 		<dependency>
+			<!-- needed by cloud config in order to set the module name. bootstrap.yml -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<!-- automatic discovery service lib. Note that eureka lib has actuator 
-			lib as a dependency but we explicitly declare it because cloud-config-client 
-			needs it as well (if we decide to remove eureka lib then cloud-config-client 
-			will still have the lib.). -->
+
 		<dependency>
+			<!-- automatic discovery service lib. Note that eureka lib has actuator 
+				lib as a dependency but we explicitly declare it because cloud-config-client 
+				needs it as well (if we decide to remove eureka lib then cloud-config-client 
+				will still have the lib.). -->
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
-		<!-- Hystrix is a latency and fault tolerance library designed to isolate 
-			points of access to remote systems, services and 3rd party libraries, stop 
-			cascading failure and enable resilience in complex distributed systems where 
-			failure is inevitable. -->
+
 		<dependency>
+			<!-- needed to config ehcache without xml (using java class config) -->
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<dependency>
+			<!-- Hystrix is a latency and fault tolerance library designed to isolate 
+				points of access to remote systems, services and 3rd party libraries, stop 
+				cascading failure and enable resilience in complex distributed systems where 
+				failure is inevitable. -->
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>com.fasterxml.jackson.dataformat</groupId> -->
-		<!-- <artifactId>jackson-dataformat-xml</artifactId> -->
-		<!-- <version>2.4.0</version> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<!-- A Java DSL for reading JSON documents -->
@@ -89,6 +97,7 @@
 			<artifactId>json-path</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path-assert</artifactId>
@@ -97,9 +106,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
-			<version>2.7.4</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

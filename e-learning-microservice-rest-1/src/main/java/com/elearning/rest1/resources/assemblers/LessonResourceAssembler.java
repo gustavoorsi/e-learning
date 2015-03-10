@@ -20,7 +20,7 @@ public class LessonResourceAssembler implements ResourceAssembler<Lesson, Lesson
 		LessonResource resource = new LessonResource(lesson);
 
 		// add link to itself ( rel = self )
-		Link selfLink = linkTo(methodOn(LessonRestController.class).getLesson(lesson.getId())).withSelfRel();
+		Link selfLink = linkTo(methodOn(LessonRestController.class).getLesson(lesson.getId(), null)).withSelfRel();
 		resource.add(selfLink);
 
 		return resource;
