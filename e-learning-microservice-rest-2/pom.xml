@@ -20,26 +20,36 @@
 
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- lib to centralize all config properties in the cloud under the project 
-			e-learning-cloudconfig. I'm saving the server port number for this microservice 
-			so e-learning-cloudconfig should be run first. -->
+
 		<dependency>
+			<!-- lib to centralize all config properties in the cloud under the project 
+				e-learning-cloudconfig. I'm saving the server port number for this microservice 
+				so e-learning-cloudconfig should be run first. -->
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-client</artifactId>
 		</dependency>
-		<!-- needed by cloud config in order to set the module name. bootstrap.yml -->
+
 		<dependency>
+			<!-- needed by cloud config in order to set the module name. bootstrap.yml -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<!-- automatic discovery service lib -->
+
 		<dependency>
+			<!-- automatic discovery service lib -->
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+
+		<dependency>
+			<!-- adding spring security lib -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
