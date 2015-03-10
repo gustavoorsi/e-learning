@@ -23,9 +23,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.elearning.rest2.security.authenticators.external.ExternalServiceAuthenticator;
+import com.elearning.rest2.security.authenticators.external.SomeExternalServiceAuthenticator;
 import com.elearning.rest2.security.filters.AuthenticationFilter;
 import com.elearning.rest2.security.filters.ManagementEndpointAuthenticationFilter;
 import com.elearning.rest2.security.providers.BackendAdminUsernamePasswordAuthenticationProvider;
+import com.elearning.rest2.security.providers.DomainUsernamePasswordAuthenticationProvider;
+import com.elearning.rest2.security.providers.TokenAuthenticationProvider;
+import com.elearning.rest2.security.services.TokenService;
 
 //@formatter:off
 /**
@@ -112,12 +117,34 @@ public class SecurityRest2Configuration extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(backendAdminUsernamePasswordAuthenticationProvider());
+
+		auth.authenticationProvider(backendAdminUsernamePasswordAuthenticationProvider())
+				.authenticationProvider(domainUsernamePasswordAuthenticationProvider()).authenticationProvider(tokenAuthenticationProvider());
 	}
-	
+
 	@Bean
-    public AuthenticationProvider backendAdminUsernamePasswordAuthenticationProvider() {
-        return new BackendAdminUsernamePasswordAuthenticationProvider();
-    }
+	public AuthenticationProvider backendAdminUsernamePasswordAuthenticationProvider() {
+		return new BackendAdminUsernamePasswordAuthenticationProvider();
+	}
+
+	@Bean
+	public AuthenticationProvider domainUsernamePasswordAuthenticationProvider() {
+		return new DomainUsernamePasswordAuthenticationProvider(tokenService(), someExternalServiceAuthenticator());
+	}
+
+	@Bean
+	public AuthenticationProvider tokenAuthenticationProvider() {
+		return new TokenAuthenticationProvider(tokenService());
+	}
+
+	@Bean
+	public TokenService tokenService() {
+		return new TokenService();
+	}
+
+	@Bean
+	public ExternalServiceAuthenticator someExternalServiceAuthenticator() {
+		return new SomeExternalServiceAuthenticator();
+	}
 
 }

@@ -60,6 +60,14 @@
 		</dependency>
 
 
+		<dependency>
+			<!-- using ehcache to store authentication tokens. Used only in TokenService 
+				so far. -->
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.7.4</version>
+		</dependency>
+
 	</dependencies>
 
 </project>
