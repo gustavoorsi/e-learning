@@ -1,5 +1,9 @@
 package com.elearning.rest1.endpoints;
 
+import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.COURSES;
+import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.GET_COURSE;
+import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.GET_LESSONS_FOR_COURSE;
+import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.POST_LESSON_TO_COURSE;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -38,8 +42,9 @@ import com.elearning.service.LessonService;
  * @author Gustavo Orsi
  *
  */
-@RestController // It states that all mapped methods will produce direct response output using @ResponseBody
-@RequestMapping("/courses")
+@RestController
+// It states that all mapped methods will produce direct response output using @ResponseBody
+@RequestMapping(COURSES)
 public class CourseRestController {
 
 	// *************************************************************//
@@ -78,8 +83,7 @@ public class CourseRestController {
 		return new ResponseEntity<>(assembler.toResource(courses, this.courseResourceAssembler), HttpStatus.OK);
 	}
 
-	
-	@RequestMapping(value = "/{courseId}/lessons",  method = RequestMethod.GET)
+	@RequestMapping(value = GET_LESSONS_FOR_COURSE, method = RequestMethod.GET)
 	public HttpEntity<PagedResources<LessonResource>> getLessonsForCourse( //
 			@PathVariable Long courseId, //
 			@PageableDefault(size = 10, page = 0) Pageable pageable, //
@@ -100,7 +104,7 @@ public class CourseRestController {
 	 * @param courseId
 	 * @return a <code>CourseResource</code>
 	 */
-	@RequestMapping(value = "/{courseId}", method = RequestMethod.GET)
+	@RequestMapping(value = GET_COURSE, method = RequestMethod.GET)
 	public HttpEntity<CourseResource> getCourse(//
 			@PathVariable Long courseId//
 	) {
@@ -134,7 +138,7 @@ public class CourseRestController {
 	 * @param input
 	 * @return a 201 response code and the new resource uri or a <code>HttpStatus.NOT_FOUND</code> in case the course does not exist.
 	 */
-	@RequestMapping(value = "/{courseId}/lesson", method = RequestMethod.POST)
+	@RequestMapping(value = POST_LESSON_TO_COURSE, method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public HttpEntity<?> addLesson(@PathVariable Long courseId, @RequestBody Lesson input) {
 

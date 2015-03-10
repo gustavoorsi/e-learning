@@ -1,0 +1,23 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: e-learning-service-discovery-eureka
+    
+management:
+  context-path: /admin
+
+
+#eureka specific config properties
+eureka:
+  instance:
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+  client:
+    registerWithEureka: false # we don't have any peers so we can turn this off.
+    fetchRegistry: false # we don't have any peers so we can turn this off.
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/ 

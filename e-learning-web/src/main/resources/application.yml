@@ -1,0 +1,26 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: e-learning-web
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      
+#oauth2:
+#  client:
+#    clientId: bd1c0a783ccdd1c9b9e4
+#    clientSecret: 1a9030fbca47a5b2c28e92f19050bb77824b5ad1
+#    tokenUri: https://github.com/login/oauth/access_token
+#    authorizationUri: https://github.com/login/oauth/authorize
+#    authenticationScheme: form
+#  resource:
+#    userInfoUri: https://api.github.com/user
+#    preferTokenInfo: false

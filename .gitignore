@@ -46,12 +46,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-/e-learning-cloudconfig/
-/e-learning-hystrix/
-/e-learning-microservice-rest-1/
-/e-learning-microservice-rest-2/
-/e-learning-microservice-rest-3/
-/e-learning-model/
-/e-learning-service/
-/e-learning-service-discovery-eureka/
-/e-learning-web/
+/e-learning-cloudconfig/target/
+/e-learning-hystrix/target/
+/e-learning-microservice-rest-1/target/
+/e-learning-microservice-rest-2/target/
+/e-learning-microservice-rest-3/target/
+/e-learning-model/target/
+/e-learning-service/target/
+/e-learning-service-discovery-eureka/target/
+/e-learning-web/target/
+/e-learning-authentication-server/target/

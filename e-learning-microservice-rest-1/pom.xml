@@ -71,19 +71,12 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 		</dependency>
-		<!-- adding spring security lib -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-security</artifactId> -->
-		<!-- </dependency> -->
 
 		<!-- <dependency> -->
 		<!-- <groupId>com.fasterxml.jackson.dataformat</groupId> -->
 		<!-- <artifactId>jackson-dataformat-xml</artifactId> -->
 		<!-- <version>2.4.0</version> -->
 		<!-- </dependency> -->
-
-
 
 		<dependency>
 			<!-- A Java DSL for reading JSON documents -->
@@ -94,7 +87,6 @@
 				or the bracket–notation $['store']['book'][0]['title'] -->
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
-			<version>${jsonpath.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -104,10 +96,11 @@
 			<scope>test</scope>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-security</artifactId> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.7.4</version>
+		</dependency>
 	</dependencies>
 
 </project>
