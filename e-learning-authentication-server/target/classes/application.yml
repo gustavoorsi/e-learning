@@ -1,0 +1,13 @@
+server:
+ port: 7777
+ 
+spring:
+  application:
+    name: AUTHENTIATION-SERVER
+        
+eureka:
+ client:
+  registerWithEureka: false #set to false to not send the connection request each time (for instance when running a test case that doesn't need eureka)
+  fetchRegistry: false #set to false to not send the connection request each time (for instance when running a test case that doesn't need eureka)
+  serviceUrl:
+   defaultZone: http://localhost:8761/eureka/
