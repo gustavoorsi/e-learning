@@ -17,23 +17,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 * 
 * @Configuration: tells Spring that this class will act as a configuration source. (There can be many such classes.)
 * 
-* @EnableWebMvcSecurity: A lot is happening by adding this one. Security filters with filter chain are configured and applied. @AuthenticationPrincipal
-*                        annotation starts working. ExceptionTranslationFilter catches AuthenticationExceptions and forwards to proper
-*                        AuthorizationEntryPoints. Basically, after this annotation alone our MVC services are not directly accessible
-*                        anymore.
-* 						  @EnableWebMvcSecurity VS @EnableWebSecurity:
-* 						  @EnableWebMvcSecurity annotation which will do the same as @EnableWebSecurity and provide integration with Spring MVC. Among other
-*                        things, it will ensure our CSRF Token is included in our forms automatically (when using Thymleaf 2.1 for example.)
-*                        
-* @EnableGlobalMethodSecurity: Allows AOP @PreAuthorize and some other annotations to be applied to methods.                       
-* 
 * @EnableAutoConfiguration: Tells Spring-Boot to try to autoconfigure itself by using default values. Any our custom parts replace the defaults.
 * 
 * @EnableEurekaClient: Register this service in the Eureka service discovery app.
 * 
-* @ComponentScan: Enables autoscanning and processing of all Spring components in current and descendant packages.
-* 
 * @EnableWebMvc: Enables DispatcherServlet, mappings, @Controller annotated beans. We definitely need this as we are using MVC to expose REST endpoints.
+* 
+* @ComponentScan: Enables autoscanning and processing of all Spring components in current and descendant packages.
 * 
 * @EnableConfigurationProperties: It allows having beans annotated with @ConfigurationProperties that is beans that will be filled with properties from various sources.
 * 
