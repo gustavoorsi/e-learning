@@ -29,6 +29,7 @@
 		<module>e-learning-hystrix</module>
 		<module>e-learning-service</module>
 		<module>e-learning-cloudconfig</module>
+		<module>e-learning-authentication-server</module>
 	</modules>
 
 	<dependencies>

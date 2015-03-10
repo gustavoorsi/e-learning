@@ -38,7 +38,7 @@ import com.elearning.service.LessonService;
  * @author Gustavo Orsi
  *
  */
-@RestController
+@RestController // It states that all mapped methods will produce direct response output using @ResponseBody
 @RequestMapping("/courses")
 public class CourseRestController {
 
