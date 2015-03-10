@@ -1,7 +1,6 @@
 package com.elearning.rest2.endpoints;
 
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.FOO;
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.TEST_ENDPOINT_BASE;
+import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -23,7 +22,7 @@ import com.elearning.rest2.resources.assemblers.FooResourceAssembler;
  *
  */
 @RestController
-@RequestMapping(TEST_ENDPOINT_BASE)
+@RequestMapping(FOO_ENDPOINT_BASE)
 public class FooController {
 
 	// *************************************************************//
@@ -42,7 +41,7 @@ public class FooController {
 	 * 
 	 * @return a foo
 	 */
-	@RequestMapping(value = FOO, method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public HttpEntity<FooResource> getFoo() {
 
 		Foo foo = new Foo(1L, "a Foo");
