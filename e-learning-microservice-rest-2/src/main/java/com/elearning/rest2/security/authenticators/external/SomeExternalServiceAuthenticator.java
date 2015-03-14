@@ -2,7 +2,7 @@ package com.elearning.rest2.security.authenticators.external;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import com.elearning.domain.User;
+import com.elearning.rest2.domain.User;
 import com.elearning.rest2.security.authentications.AuthenticatedExternalWebService;
 
 public class SomeExternalServiceAuthenticator implements ExternalServiceAuthenticator {

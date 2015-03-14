@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.elearning.domain.Foo;
+import com.elearning.rest2.domain.Foo;
 import com.elearning.rest2.resources.FooResource;
 import com.elearning.rest2.resources.assemblers.FooResourceAssembler;
 

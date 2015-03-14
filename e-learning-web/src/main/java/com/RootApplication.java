@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
 import org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
-import org.springframework.cloud.security.sso.EnableOAuth2Sso;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration(exclude = { ManagementSecurityAutoConfiguration.class, SecurityAutoConfiguration.class, SpringBootWebSecurityConfiguration.class })

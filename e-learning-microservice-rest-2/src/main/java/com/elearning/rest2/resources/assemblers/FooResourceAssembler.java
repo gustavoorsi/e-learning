@@ -7,7 +7,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
-import com.elearning.domain.Foo;
+import com.elearning.rest2.domain.Foo;
 import com.elearning.rest2.endpoints.FooController;
 import com.elearning.rest2.resources.FooResource;
 

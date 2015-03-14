@@ -1,4 +1,4 @@
-package com.elearning.domain;
+package com.elearning.rest2.domain;
 
 public class Foo {
 

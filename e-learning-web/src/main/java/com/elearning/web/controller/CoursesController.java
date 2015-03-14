@@ -24,14 +24,15 @@ import com.elearning.service.CourseService;
 public class CoursesController {
 
 	@Autowired
-	@Qualifier(value = "courseServiceRest")
-	private CourseService courseService; // use a service that will invoke the rest service to manipulate courses.
+	// @Qualifier(value = "courseServiceRest") // use a service that will invoke the rest service to manipulate courses.
+	@Qualifier(value = "courseServiceLocal")
+	private CourseService courseService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getCourses() {
 
 		Map<String, Object> model = new HashMap<String, Object>();
-		
+
 		List<Course> courses = courseService.findAll();
 
 		model.put("courses", courses);
