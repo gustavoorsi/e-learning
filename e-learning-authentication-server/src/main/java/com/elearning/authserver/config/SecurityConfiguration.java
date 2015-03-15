@@ -31,13 +31,13 @@ public class SecurityConfiguration extends GlobalAuthenticationConfigurerAdapter
 		return new UserDetailsService() {
 
 			@Override
-			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+			public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 				try {
-					User user = userRepository.findByUsername(username).get();
-					return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), true, true, true, true,
+					User user = userRepository.findByEmail(email).get();
+					return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true, true, true,
 							AuthorityUtils.createAuthorityList("USER"));
 				} catch (NoSuchElementException ex) {
-					throw new UsernameNotFoundException("could not find the user '" + username + "'");
+					throw new UsernameNotFoundException("could not find the user '" + email + "'");
 				}
 
 			}

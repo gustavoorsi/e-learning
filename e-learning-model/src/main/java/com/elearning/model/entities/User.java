@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * 
  * Model class that represent a User.
@@ -19,27 +22,43 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
+	@NotEmpty(message = "First name is required.")
 	@Column(name = "first_name")
 	private String firstName;
 
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column
-	private String username;
+	@Email(message = "Please provide a valid email address.")
+	@NotEmpty(message = "Email is required.")
+	@Column(unique = true, nullable = false)
+	private String email;
 
+	@NotEmpty(message = "Password is required.")
 	@Column
 	private String password;
+
+	@Column( name = "granted_authorities" )
+	private String grantedAuthorities;
 
 	public User() {
 	}
 
-	public User(final String username) {
-		this.username = username;
+	public User(User user) {
+		this.id = user.id;
+		this.firstName = user.firstName;
+		this.lastName = user.lastName;
+		this.email = user.email;
+		this.password = user.password;
+		this.grantedAuthorities = user.grantedAuthorities;
 	}
 
-	public User(String username, String password) {
-		this.username = username;
+	public User(final String email) {
+		this.email = email;
+	}
+
+	public User(String email, String password) {
+		this.email = email;
 		this.password = password;
 	}
 
@@ -67,12 +86,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -83,9 +102,17 @@ public class User {
 		this.password = password;
 	}
 
+	public String getGrantedAuthorities() {
+		return grantedAuthorities;
+	}
+
+	public void setGrantedAuthorities(String grantedAuthorities) {
+		this.grantedAuthorities = grantedAuthorities;
+	}
+
 	@Override
 	public String toString() {
-		return new StringBuilder().append("ID[").append(this.id).append("], User[").append(this.username).append("].").toString();
+		return new StringBuilder().append("ID[").append(this.id).append("], User[").append(this.email).append("].").toString();
 	}
 
 }

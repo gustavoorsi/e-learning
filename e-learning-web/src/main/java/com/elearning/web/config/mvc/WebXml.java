@@ -1,4 +1,4 @@
-package com.elearning.web.config;
+package com.elearning.web.config.mvc;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;

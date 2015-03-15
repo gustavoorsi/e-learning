@@ -50,10 +50,10 @@
 			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
 		</dependency>
 
-		<!-- WebJars: bootstrap and jquery webjar artifacts are managed in org.springframework.cloud:spring-cloud-netflix:1.0.0.M2. 
-			Nevertheless it's a good idea to explicitly declare them here beuuase even 
-			if we decide to get rid of netflix jar we still want to keep these webjars 
-			for our ui. -->
+		<!-- WebJars START: bootstrap and jquery webjar artifacts are managed in 
+			org.springframework.cloud:spring-cloud-netflix:1.0.0.M2. Nevertheless it's 
+			a good idea to explicitly declare them here beuuase even if we decide to 
+			get rid of netflix jar we still want to keep these webjars for our ui. -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
@@ -67,7 +67,7 @@
 			<artifactId>knockout</artifactId>
 			<version>3.2.0-1</version>
 		</dependency>
-
+		<!-- WebJars END -->
 
 		<dependency>
 			<!-- lib to centralize all config properties in the cloud under the project 
@@ -100,18 +100,23 @@
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
 		</dependency>
 
-		<!-- adding spring security lib -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-security</artifactId> -->
-<!-- 		</dependency> -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.cloud</groupId> -->
-<!-- 			<artifactId>spring-cloud-starter-oauth2</artifactId> -->
-<!-- 			<version>1.0.0.RC2</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<!-- adding spring security lib -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.cloud</groupId> -->
+		<!-- <artifactId>spring-cloud-starter-oauth2</artifactId> -->
+		<!-- <version>1.0.0.RC2</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-remote-shell</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

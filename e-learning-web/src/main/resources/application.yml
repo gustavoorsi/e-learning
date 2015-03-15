@@ -18,6 +18,11 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
       
+management:
+  context-path: /actuator
+  security:
+    role: ADMIN # ADMIN is the default role, but we explicitly set it. 
+      
 #oauth2:
 #  client:
 #    clientId: bd1c0a783ccdd1c9b9e4

@@ -1,4 +1,4 @@
-package com.elearning.web.config;
+package com.elearning.web.config.mvc.c;
 
 import java.util.Collections;
 
@@ -20,6 +20,8 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home/home");
+        registry.addViewController("/login").setViewName("login/login");
+        registry.addViewController("/accessDenied").setViewName("errors/accessDenied");
     }
 	
 	@Bean(name = "restTemplate" )

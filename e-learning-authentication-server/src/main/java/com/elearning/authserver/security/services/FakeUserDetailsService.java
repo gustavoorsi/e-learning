@@ -29,21 +29,21 @@ public class FakeUserDetailsService implements UserDetailsService {
 	private UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 		User user;
 		try {
-			user = userRepository.findByUsername(username).get();
+			user = userRepository.findByEmail(email).get();
 		} catch (NoSuchElementException ex) {
-			throw new UsernameNotFoundException("Username " + username + " notfound");
+			throw new UsernameNotFoundException("Username " + email + " notfound");
 		}
 
-		return new org.springframework.security.core.userdetails.User(username, user.getPassword(), getGrantedAuthorities(username));
+		return new org.springframework.security.core.userdetails.User(email, user.getPassword(), getGrantedAuthorities(email));
 	}
 
-	private Collection<? extends GrantedAuthority> getGrantedAuthorities(String username) {
+	private Collection<? extends GrantedAuthority> getGrantedAuthorities(String email) {
 		Collection<? extends GrantedAuthority> authorities;
-		if (username.equals("gustavoorsi")) {
+		if (email.equals("gustavoorsi")) {
 			authorities = asList(() -> "ROLE_ADMIN", () -> "ROLE_BASIC");
 		} else {
 			authorities = asList(() -> "ROLE_BASIC");

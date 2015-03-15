@@ -19,5 +19,6 @@ INSERT INTO lesson_step VALUES ( 8, 'Test Step 4', 2 );
 INSERT INTO lesson_step VALUES ( 9, 'Test Step 1', 3 );
 INSERT INTO lesson_step VALUES ( 10, 'Test Step 2', 3 );
 
-INSERT INTO user VALUES ( 1, 'Gustavo', 'Orsi', '123456', 'gustavoorsi' );
-INSERT INTO user VALUES ( 2, 'John', 'Connor', '654321', 'john' );
+INSERT INTO user (id, first_name, last_name, email, password, granted_authorities) VALUES ( 1, 'Gustavo', 'Orsi', 'gustavoorsi@gmail.com','password', 'ROLE_USER,ROLE_ANONYMOUS,ROLE_ADMIN' );
+INSERT INTO user (id, first_name, last_name, email, password, granted_authorities) VALUES ( 2, 'John', 'Connor', 'john@hastalavistababy.com','password', 'ROLE_USER,ROLE_ANONYMOUS' );
+
