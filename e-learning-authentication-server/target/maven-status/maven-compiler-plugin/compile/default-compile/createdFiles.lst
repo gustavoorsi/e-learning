@@ -1,7 +1,0 @@
-com\elearning\service\CourseService.class
-com\elearning\service\LessonStepService.class
-com\elearning\service\impl\LessonStepServiceImpl.class
-com\elearning\service\impl\LessonServiceImpl.class
-com\elearning\service\LessonService.class
-com\elearning\RootApplication.class
-com\elearning\service\impl\CourseServiceImpl.class
