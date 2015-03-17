@@ -12,5 +12,9 @@ public abstract class ConstantEndpointURLs {
 	// LESSONS
 	public static final String LESSONS = API_PATH + "/lessons";
 	public static final String GET_LESSON = "/{lessonId}";
+	
+	// FOO
+	public static final String FOOS = API_PATH + "/foos";
+	public static final String GET_FOO = "/{fooId}";
 
 }

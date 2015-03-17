@@ -15,74 +15,21 @@
  */
 package com.elearning.web.config.security;
 
-import static com.elearning.web.constants.ConstantEndpointURLs.AUTOCONFIG_ENDPOINT;
-import static com.elearning.web.constants.ConstantEndpointURLs.BEANS_ENDPOINT;
-import static com.elearning.web.constants.ConstantEndpointURLs.CONFIGPROPS_ENDPOINT;
-import static com.elearning.web.constants.ConstantEndpointURLs.ENV_ENDPOINT;
-import static com.elearning.web.constants.ConstantEndpointURLs.MAPPINGS_ENDPOINT;
-import static com.elearning.web.constants.ConstantEndpointURLs.METRICS_ENDPOINT;
-import static com.elearning.web.constants.ConstantEndpointURLs.SHUTDOWN_ENDPOINT;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(WebSecurityConfig.ORDER_SECURITY_GENERAL_CONFIG) 
+public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-	private static final String PERMIT_URL_RESOURCES = "/resources/**";
-	private static final String PERMIT_URL_SIGNUP = "/signup";
-	private static final String PERMIT_URL_HOME = "/";
-
-	private static final String[] ADMIN_ENDPOINTS = { AUTOCONFIG_ENDPOINT, BEANS_ENDPOINT, CONFIGPROPS_ENDPOINT, ENV_ENDPOINT, MAPPINGS_ENDPOINT,
-			METRICS_ENDPOINT, SHUTDOWN_ENDPOINT };
-
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-
-		// @formatter:off
-        http
-            .authorizeRequests()
-            	.antMatchers(ADMIN_ENDPOINTS)
-            		.hasRole("ADMIN")
-            		.and()
-    		.authorizeRequests()
-                .antMatchers(
-                		PERMIT_URL_RESOURCES, 
-                		PERMIT_URL_SIGNUP, 
-                		PERMIT_URL_HOME
-            		).permitAll()
-	                .anyRequest().authenticated()
-	                .and()
-	            .formLogin()
-	                .loginPage("/login")
-	                .permitAll()
-	                .and()
-	            .logout()
-	                .permitAll()
-	                .and()
-            .authorizeRequests()
-                .and()
-                .exceptionHandling()
-        			.accessDeniedPage("/accessDenied");
-    	// @formatter:on
-	}
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService userDetailsService) throws Exception {
-		// @formatter:off
-        auth
-            .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
-        // @formatter:on
-	}
-
+	
+	protected final static int ORDER_SECURITY_AUTHORIZATION_CONFIG = 1;
+	protected final static int ORDER_SECURITY_AUTHENTICATION_CONFIG = 2;
+	protected final static int ORDER_SECURITY_GENERAL_CONFIG = 3;
+	
 }

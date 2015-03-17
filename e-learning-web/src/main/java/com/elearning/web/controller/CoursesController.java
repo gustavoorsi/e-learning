@@ -24,8 +24,8 @@ import com.elearning.service.CourseService;
 public class CoursesController {
 
 	@Autowired
-	// @Qualifier(value = "courseServiceRest") // use a service that will invoke the rest service to manipulate courses.
-	@Qualifier(value = "courseServiceLocal")
+	 @Qualifier(value = "courseServiceRest") // use a service that will invoke the rest service to manipulate courses.
+//	@Qualifier(value = "courseServiceLocal")
 	private CourseService courseService;
 
 	@RequestMapping(method = RequestMethod.GET)

@@ -7,20 +7,20 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
-import com.elearning.model.entities.Lesson;
-import com.elearning.rest1.endpoints.LessonRestController;
-import com.elearning.rest1.resources.LessonResource;
+import com.elearning.model.entities.Foo;
+import com.elearning.rest1.endpoints.FooRestController;
+import com.elearning.rest1.resources.FooResource;
 
 @Component
-public class LessonResourceAssembler implements ResourceAssembler<Lesson, LessonResource> {
+public class FooResourceAssembler implements ResourceAssembler<Foo, FooResource> {
 
 	@Override
-	public LessonResource toResource(Lesson lesson) {
+	public FooResource toResource(Foo foo) {
 
-		LessonResource resource = new LessonResource(lesson);
+		FooResource resource = new FooResource(foo);
 
 		// add link to itself ( rel = self )
-		Link selfLink = linkTo(methodOn(LessonRestController.class).getLesson(lesson.getId())).withSelfRel();
+		Link selfLink = linkTo(methodOn(FooRestController.class).getFoo(foo.getId())).withSelfRel();
 		resource.add(selfLink);
 
 		return resource;

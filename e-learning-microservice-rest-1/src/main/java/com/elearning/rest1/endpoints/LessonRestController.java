@@ -12,8 +12,6 @@ import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +35,6 @@ import com.elearning.service.LessonStepService;
  */
 @RestController
 @RequestMapping(LESSONS)
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class LessonRestController {
 
 	// *************************************************************//
@@ -69,8 +66,7 @@ public class LessonRestController {
 	 */
 	@RequestMapping(value = GET_LESSON, method = RequestMethod.GET)
 	public HttpEntity<LessonResource> getLesson(//
-			@PathVariable Long lessonId, //
-			@AuthenticationPrincipal org.springframework.security.core.userdetails.User loggedInUser) {
+			@PathVariable Long lessonId) {
 
 		Lesson lesson = this.lessonService.findById(lessonId);
 

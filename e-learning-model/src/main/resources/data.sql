@@ -22,3 +22,8 @@ INSERT INTO lesson_step VALUES ( 10, 'Test Step 2', 3 );
 INSERT INTO user (id, first_name, last_name, email, password, granted_authorities) VALUES ( 1, 'Gustavo', 'Orsi', 'gustavoorsi@gmail.com','password', 'ROLE_USER,ROLE_ANONYMOUS,ROLE_ADMIN' );
 INSERT INTO user (id, first_name, last_name, email, password, granted_authorities) VALUES ( 2, 'John', 'Connor', 'john@hastalavistababy.com','password', 'ROLE_USER,ROLE_ANONYMOUS' );
 
+INSERT INTO foo (id, name, description) VALUES (1, 'Foo 1', 'Description for Foo 1');
+INSERT INTO foo (id, name, description) VALUES (2, 'Foo 2', 'Description for Foo 2');
+INSERT INTO foo (id, name, description) VALUES (3, 'Foo 3', 'Description for Foo 3');
+INSERT INTO foo (id, name, description) VALUES (4, 'Foo 4', 'Description for Foo 4');
+

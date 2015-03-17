@@ -16,7 +16,6 @@
 package com.elearning.web.config.security;
 
 import java.util.Collection;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,12 +48,8 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user;
-		try {
-			user = userRepository.findByEmail(email).get();
-		} catch (NoSuchElementException ex) {
-			throw new UsernameNotFoundException("Could not find user " + email);
-		}
+
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
 
 		return new CustomUserDetails(user);
 	}

@@ -1,4 +1,4 @@
-package com.elearning.web.config.mvc.v;
+package com.elearning.web.config.mvc;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 

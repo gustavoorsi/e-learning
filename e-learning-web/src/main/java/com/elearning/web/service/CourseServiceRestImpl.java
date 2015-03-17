@@ -14,34 +14,32 @@ import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.elearning.model.entities.Course;
 import com.elearning.model.exception.CourseTopicAlreadyExistException;
 import com.elearning.service.CourseService;
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.DiscoveryClient;
+import com.elearning.web.service.endpointdiscovery.ServiceDiscovery;
 
 @Service(value = "courseServiceRest")
 public class CourseServiceRestImpl implements CourseService {
 
+	// NOTE: this restTemplate has been configured to ignore unknown json properties. Look at MessageConverterConfiguration for details.
 	@Autowired
-	@Qualifier(value = "restTemplate")
-	private RestTemplate restTemplate; // NOTE: this restTemplate has been configured to ignore unknown json properties. Look at
-										// WebMvcConfigureation for details.
-
+	@Qualifier(value = "oauth2RestTemplate")
+	private OAuth2RestTemplate restTemplate;
+	
 	@Autowired
-	private DiscoveryClient discoveryClient;
+	@Qualifier(value = "basicRestServiceDiscovery")
+	private ServiceDiscovery serviceDiscovery;
 
 	@Override
 	public Course addCourse(Course course) throws CourseTopicAlreadyExistException {
 
-		InstanceInfo instanceInfo = this.discoveryClient.getNextServerFromEureka("E-LEARNING-MICROSERVICE-REST-1", false);
+		String host = serviceDiscovery.getServiceUrl();
 
-		String hostname = instanceInfo.getHomePageUrl();
-
-		String endpoint = hostname + "courses";
+		String endpoint = host + "/courses";
 
 		ResponseEntity response = restTemplate.postForEntity(endpoint, course, null);
 
@@ -52,17 +50,15 @@ public class CourseServiceRestImpl implements CourseService {
 	public List<Course> findAll() {
 		List<Course> courses = new ArrayList<Course>();
 
-		InstanceInfo instanceInfo = this.discoveryClient.getNextServerFromEureka("E-LEARNING-MICROSERVICE-REST-1", false);
+		String host = serviceDiscovery.getServiceUrl();
 
-		String hostname = instanceInfo.getHomePageUrl();
+		String endpoint = host + "/courses";
 
-		String endpoint = hostname + "courses";
-
-		ResponseEntity<PagedResources<Resource<Course>>> pagedResourceResponse2 = restTemplate.exchange(endpoint, HttpMethod.GET, null,
+		ResponseEntity<PagedResources<Resource<Course>>> pagedResourceResponse = restTemplate.exchange(endpoint, HttpMethod.GET, null,
 				new ParameterizedTypeReference<PagedResources<Resource<Course>>>() {
 				});
 
-		PagedResources<Resource<Course>> a = pagedResourceResponse2.getBody();
+		PagedResources<Resource<Course>> a = pagedResourceResponse.getBody();
 
 		for (Resource<Course> rc : a.getContent()) {
 			Course c = rc.getContent();
@@ -84,9 +80,11 @@ public class CourseServiceRestImpl implements CourseService {
 
 		Course course = null;
 
-		RestTemplate restTemplate = new RestTemplate();
+		String host = serviceDiscovery.getServiceUrl();
 
-		ResponseEntity<Resource<Course>> responseEntity = restTemplate.exchange("http://localhost:8081/courses/" + courseId, HttpMethod.GET, null,
+		String endpoint = host + "/courses/" + courseId;
+
+		ResponseEntity<Resource<Course>> responseEntity = restTemplate.exchange(endpoint, HttpMethod.GET, null,
 				new ParameterizedTypeReference<Resource<Course>>() {
 				}, Collections.emptyMap());
 

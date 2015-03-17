@@ -17,8 +17,8 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +73,7 @@ public class CourseRestController {
 	 * 
 	 * @return a Page of <code>CourseResourece</code> instance containing all courses.
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public HttpEntity<PagedResources<CourseResource>> getAll(//
 			@PageableDefault(size = 10, page = 0) Pageable pageable, //
 			PagedResourcesAssembler<Course> assembler//
@@ -143,17 +143,15 @@ public class CourseRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public HttpEntity<?> addLesson( //
 			@PathVariable Long courseId, //
-			@RequestBody Lesson input, //
-			@AuthenticationPrincipal org.springframework.security.core.userdetails.User loggedInUser //
+			@RequestBody Lesson input //
 	) {
 
 		Lesson lesson = this.lessonService.addLesson(courseId, input);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 
-		String href = ControllerLinkBuilder
-				.linkTo(ControllerLinkBuilder.methodOn(LessonRestController.class, lesson.getId()).getLesson(lesson.getId(), loggedInUser)).withSelfRel()
-				.getHref();
+		String href = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(LessonRestController.class, lesson.getId()).getLesson(lesson.getId()))
+				.withSelfRel().getHref();
 		httpHeaders.setLocation(ServletUriComponentsBuilder.fromPath(href).build().toUri());
 
 		return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
