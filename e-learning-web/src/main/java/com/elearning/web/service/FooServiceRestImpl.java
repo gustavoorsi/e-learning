@@ -21,10 +21,10 @@ import com.elearning.service.FooService;
 import com.elearning.web.service.endpointdiscovery.ServiceDiscovery;
 
 @Service(value = "fooRestService")
-public class FooServiceLocalImpl implements FooService {
+public class FooServiceRestImpl implements FooService {
 
 	@Autowired
-	@Qualifier(value = "oauth2RestTemplate")
+	@Qualifier(value = "oauth2RestTemplateClientCredentials")
 	private RestTemplate restTemplate;
 
 	@Autowired

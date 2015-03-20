@@ -16,8 +16,8 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 @Configuration
 public class RestTemplatesConfiguration {
 
-	@Bean(name = "oauth2RestTemplate")
-	public OAuth2RestTemplate getOauth2RestTemplate() {
+	@Bean(name = "oauth2RestTemplateClientCredentials")
+	public OAuth2RestTemplate getOauth2RestTemplateClientCredentials() {
 
 		ClientCredentialsResourceDetails clientDetails = new ClientCredentialsResourceDetails();
 		clientDetails.setAccessTokenUri("http://localhost:8081/oauth/token");

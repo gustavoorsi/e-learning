@@ -29,6 +29,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.elearning.model.entities.Course;
 import com.elearning.model.entities.Lesson;
+import com.elearning.model.entities.User;
+import com.elearning.rest1.config.security.LoggedInUser;
 import com.elearning.rest1.resources.CourseResource;
 import com.elearning.rest1.resources.LessonResource;
 import com.elearning.rest1.resources.assemblers.CourseResourceAssembler;
@@ -76,7 +78,7 @@ public class CourseRestController {
 	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
 	public HttpEntity<PagedResources<CourseResource>> getAll(//
 			@PageableDefault(size = 10, page = 0) Pageable pageable, //
-			PagedResourcesAssembler<Course> assembler//
+			PagedResourcesAssembler<Course> assembler //
 	) {
 
 		Page<Course> courses = this.courseService.findAll(pageable);

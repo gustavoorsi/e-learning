@@ -1,4 +1,4 @@
-package com.elearning.rest1.config.security;
+package com.elearning.rest1.config.security.oauth2;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +15,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 	public void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
          http
+         .requestMatchers().antMatchers("/api/v1/microservice1Endpoint/courses","/api/v1/microservice1Endpoint/foos").and()
          .authorizeRequests()
          .anyRequest().access("#oauth2.hasScope('read')");
          // @formatter:on

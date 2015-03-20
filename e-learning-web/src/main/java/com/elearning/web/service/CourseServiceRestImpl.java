@@ -27,7 +27,7 @@ public class CourseServiceRestImpl implements CourseService {
 
 	// NOTE: this restTemplate has been configured to ignore unknown json properties. Look at MessageConverterConfiguration for details.
 	@Autowired
-	@Qualifier(value = "oauth2RestTemplate")
+	@Qualifier(value = "oauth2RestTemplateClientCredentials")
 	private OAuth2RestTemplate restTemplate;
 	
 	@Autowired

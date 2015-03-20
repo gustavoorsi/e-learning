@@ -8,6 +8,9 @@ spring:
     config:
       discovery:
         enabled: true
+security:
+  user:
+    password: password
         
 eureka:
   instance:

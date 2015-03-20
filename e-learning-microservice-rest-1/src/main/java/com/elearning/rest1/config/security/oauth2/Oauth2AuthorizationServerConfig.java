@@ -1,4 +1,4 @@
-package com.elearning.rest1.config.security;
+package com.elearning.rest1.config.security.oauth2;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -25,8 +25,7 @@ public class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigur
 	@Override
 	// [2]
 	// The configure method here setup the clients that can access the server. An in memory client detail service is used here for demo
-	// purpose. Note that we had to override and set an authenticationManager because we are giving the chance to authenticate with
-	// "password" grant_type (using "password" grant_type we need to have a way to deal with username/password credentials).
+	// purpose.
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		// @formatter:off
          clients.inMemory()

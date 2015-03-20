@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.elearning.model.entities.Course;
+import com.elearning.model.entities.User;
 import com.elearning.service.CourseService;
+import com.elearning.web.config.security.LoggedInUser;
 
 @Controller
 @RequestMapping(value = "/courses")
@@ -29,7 +31,7 @@ public class CoursesController {
 	private CourseService courseService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView getCourses() {
+	public ModelAndView getCourses( @LoggedInUser User loggedInUser ) {
 
 		Map<String, Object> model = new HashMap<String, Object>();
 

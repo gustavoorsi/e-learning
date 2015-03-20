@@ -26,7 +26,8 @@ import com.elearning.service.FooService;
 
 @RestController
 @RequestMapping(FOOS)
-@PreAuthorize("hasRole('ROLE_CLIENT')") // This endpoint is only accessible by users with role 'ROLE_CLIENT'.
+//@PreAuthorize("hasRole('ROLE_CLIENT')") // This endpoint is only accessible by users with role 'ROLE_CLIENT'.
+@PreAuthorize("hasAnyRole('ROLE_CLIENT','ROLE_USER')") // This endpoint is only accessible by users with role 'ROLE_CLIENT' or 'ROLE_USER'
 public class FooRestController {
 
 	@Autowired
