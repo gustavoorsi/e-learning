@@ -10,9 +10,6 @@
         <dependent-module archiveName="e-learning-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/e-learning-service/e-learning-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="e-learning-constants-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/e-learning-constants/e-learning-constants">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="e-learning-web"/>
         <property name="java-output-path" value="/e-learning-web/target/classes"/>
     </wb-module>
