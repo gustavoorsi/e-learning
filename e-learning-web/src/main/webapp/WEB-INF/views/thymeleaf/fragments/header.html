@@ -17,7 +17,6 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 	    <script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 		<script src="../../../../resources/js/knockout.js" th:src="@{/resources/js/knockout.js}"></script>
-		<script src="../../../../resources/js/courseViewModel.js" type="text/javascript"></script>
 	</head>
 	
 	<body>
@@ -48,6 +47,14 @@
 						<li th:classappend="${page == 'foos' ? 'active' : ''}"><a href="#" th:href="@{/foos}">Foos</a></li>
 						<li><a href="#">About Us</a></li>
 						<li><a href="#">Contact</a></li>
+						<li th:classappend="${page == 'login' ? 'active' : ''}" th:if="${#authorization.expression('!isAuthenticated()')}"><a href="#" th:href="@{/login}">Login</a></li>
+						<li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#" th:href="@{/logout}">Logout</a></li>
+						<li th:if="${#authorization.expression('isAuthenticated()')}">Wellcome <span th:text="${#authentication.name}"> Annonymous </span></li>
+						
+						<div social:connected="facebook">
+	 						Only rendered if connected to Facebook
+ 						</div>
+						
 					</ul>
 				</div><!-- /navbar -->
 			

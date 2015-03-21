@@ -1,7 +1,7 @@
 package com.elearning.rest1.endpoints;
 
-import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.FOOS;
-import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.GET_FOO;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_1.FOOS;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_1.GET_FOO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

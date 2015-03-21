@@ -6,6 +6,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+import com.elearning.constants.ElearningConstants;
+
 @Configuration
 @EnableResourceServer
 public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -13,14 +15,18 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 	@Override
 	// [3]
 	public void configure(HttpSecurity http) throws Exception {
+
 		// @formatter:off
          http
-         .requestMatchers().antMatchers("/api/v1/microservice1Endpoint/courses","/api/v1/microservice1Endpoint/foos").and()
-         .authorizeRequests()
-         .anyRequest().access("#oauth2.hasScope('read')");
+	         .requestMatchers().antMatchers( 
+	        		 						ElearningConstants.API_SERVICE_1.COURSES,
+	        		 						ElearningConstants.API_SERVICE_1.FOOS
+	        		 						)
+		.and()
+	         .authorizeRequests()
+	         .anyRequest().access("#oauth2.hasScope('read')");
          // @formatter:on
 	}
-	
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {

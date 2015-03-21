@@ -16,7 +16,7 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 	    <script src="../../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 		<script src="../../../../resources/js/knockout.js" th:src="@{/resources/js/knockout.js}"></script>
-		<script src="../../../../resources/js/courseViewModel.js" type="text/javascript"></script>
+		<script src="../../../../resources/js/courseViewModel.js" th:src="@{/resources/js/courseViewModel.js}"></script>
 	</head>
 	
 	
@@ -53,6 +53,8 @@
 					<article class="list-courses">
 						<header>
 							<p>List of courses (by REST)</p>
+							restAccessToken= 
+							<input id="restAccessToken" th:value="${@oauth2RestTemplateClientCredentials.getAccessToken().getValue()}" />
 						</header>
 						<footer class="hidden-xs">
 							<p>This is a list of courses loaded by a rest call to the rest project.</p>

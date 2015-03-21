@@ -30,6 +30,7 @@
 		<module>e-learning-service</module>
 		<module>e-learning-cloudconfig</module>
 		<module>e-learning-authentication-server</module>
+		<module>e-learning-constants</module>
 	</modules>
 
 	<dependencies>
@@ -42,6 +43,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.elearning</groupId>
+			<artifactId>e-learning-constants</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

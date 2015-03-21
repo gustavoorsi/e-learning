@@ -1,6 +1,6 @@
 package com.elearning.rest2.endpoints;
 
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.FOO_ENDPOINT_BASE;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.FOO_ENDPOINT_BASE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

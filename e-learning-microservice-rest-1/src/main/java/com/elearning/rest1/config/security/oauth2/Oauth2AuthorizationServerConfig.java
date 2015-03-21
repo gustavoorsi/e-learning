@@ -29,20 +29,27 @@ public class Oauth2AuthorizationServerConfig extends AuthorizationServerConfigur
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		// @formatter:off
          clients.inMemory()
-         .withClient("client-with-registered-redirect")
-         .authorizedGrantTypes("authorization_code")
-         .authorities("ROLE_CLIENT")
-         .scopes("read", "trust")
-         .resourceIds(RESOURCE_ID)
-         .redirectUris("http://anywhere?key=value")
-         .secret("secret123")
+	         .withClient("client-with-registered-redirect")
+		         .authorizedGrantTypes("authorization_code")
+		         .authorities("ROLE_CLIENT")
+		         .scopes("read", "trust")
+		         .resourceIds(RESOURCE_ID)
+		         .redirectUris("http://anywhere?key=value")
+		         .secret("secret123")
          .and()
-         .withClient("my-client-with-secret")
-         .authorizedGrantTypes("client_credentials")
-         .authorities("ROLE_CLIENT")
-         .scopes("read")
-         .resourceIds(RESOURCE_ID)
-         .secret("secret");
+	         .withClient("my-client-with-secret")
+		         .authorizedGrantTypes("client_credentials")
+		         .authorities("ROLE_CLIENT")
+		         .scopes("read")
+		         .resourceIds(RESOURCE_ID)
+		         .secret("secret");
+//         .and()
+//         	.withClient( "web-browser-js" )
+//         		.authorizedGrantTypes( "implicit" )
+//         		.authorities("ROLE_CLIENT")
+//         		.redirectUris("http://example.com")
+//         		.scopes("read")
+//         		.resourceIds(RESOURCE_ID);
          // @formatter:on
 	}
 

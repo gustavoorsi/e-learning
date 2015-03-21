@@ -1,12 +1,12 @@
 package com.elearning.rest2.config.security;
 
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.AUTOCONFIG_ENDPOINT;
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.BEANS_ENDPOINT;
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.CONFIGPROPS_ENDPOINT;
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.ENV_ENDPOINT;
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.MAPPINGS_ENDPOINT;
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.METRICS_ENDPOINT;
-import static com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs.SHUTDOWN_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.AUTOCONFIG_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.BEANS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.CONFIGPROPS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.ENV_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.MAPPINGS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.METRICS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.SHUTDOWN_ENDPOINT;
 
 import javax.servlet.http.HttpServletResponse;
 

@@ -1,5 +1,7 @@
 package com.elearning.rest2.security.filters;
 
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.AUTHENTICATE_URL;
+
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -23,7 +25,6 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.util.UrlPathHelper;
 
-import com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs;
 import com.elearning.rest2.security.responses.TokenResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Optional;
@@ -104,7 +105,7 @@ public class AuthenticationFilter extends GenericFilterBean {
     }
 
     private boolean postToAuthenticate(HttpServletRequest httpRequest, String resourcePath) {
-        return ConstantEndpointURLs.AUTHENTICATE_URL.equalsIgnoreCase(resourcePath) && httpRequest.getMethod().equals("POST");
+        return AUTHENTICATE_URL.equalsIgnoreCase(resourcePath) && httpRequest.getMethod().equals("POST");
     }
 
     private void processUsernamePasswordAuthentication(HttpServletResponse httpResponse, Optional<String> username, Optional<String> password) throws IOException {

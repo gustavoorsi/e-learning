@@ -1,9 +1,9 @@
 package com.elearning.rest1.endpoints;
 
-import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.COURSES;
-import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.GET_COURSE;
-import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.GET_LESSONS_FOR_COURSE;
-import static com.elearning.rest1.endpoints.constantURLs.ConstantEndpointURLs.POST_LESSON_TO_COURSE;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_1.COURSES;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_1.GET_COURSE;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_1.GET_LESSONS_FOR_COURSE;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_1.POST_LESSON_TO_COURSE;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -29,8 +29,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.elearning.model.entities.Course;
 import com.elearning.model.entities.Lesson;
-import com.elearning.model.entities.User;
-import com.elearning.rest1.config.security.LoggedInUser;
 import com.elearning.rest1.resources.CourseResource;
 import com.elearning.rest1.resources.LessonResource;
 import com.elearning.rest1.resources.assemblers.CourseResourceAssembler;

@@ -1,6 +1,7 @@
 package com.elearning.rest3.endpoints;
 
-import static com.elearning.rest3.endpoints.constantURLs.ConstantEndpointURLs.*;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_3.GET_PRODUCT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_3.PRODUCT_ENDPOINT_BASE;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 

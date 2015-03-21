@@ -1,5 +1,13 @@
 package com.elearning.rest2.security.filters;
 
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.AUTOCONFIG_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.BEANS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.CONFIGPROPS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.ENV_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.MAPPINGS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.METRICS_ENDPOINT;
+import static com.elearning.constants.ElearningConstants.API_SERVICE_2.SHUTDOWN_ENDPOINT;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,14 +23,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.util.UrlPathHelper;
 
-import com.elearning.rest2.endpoints.constantURLs.ConstantEndpointURLs;
 import com.elearning.rest2.security.authentications.BackendAdminUsernamePasswordAuthenticationToken;
 import com.google.common.base.Optional;
 
@@ -57,13 +63,13 @@ public class ManagementEndpointAuthenticationFilter extends GenericFilterBean {
 
 	private void prepareManagementEndpointsSet() {
 		managementEndpoints = new HashSet<>();
-		managementEndpoints.add(ConstantEndpointURLs.AUTOCONFIG_ENDPOINT);
-		managementEndpoints.add(ConstantEndpointURLs.BEANS_ENDPOINT);
-		managementEndpoints.add(ConstantEndpointURLs.CONFIGPROPS_ENDPOINT);
-		managementEndpoints.add(ConstantEndpointURLs.ENV_ENDPOINT);
-		managementEndpoints.add(ConstantEndpointURLs.MAPPINGS_ENDPOINT);
-		managementEndpoints.add(ConstantEndpointURLs.METRICS_ENDPOINT);
-		managementEndpoints.add(ConstantEndpointURLs.SHUTDOWN_ENDPOINT);
+		managementEndpoints.add(AUTOCONFIG_ENDPOINT);
+		managementEndpoints.add(BEANS_ENDPOINT);
+		managementEndpoints.add(CONFIGPROPS_ENDPOINT);
+		managementEndpoints.add(ENV_ENDPOINT);
+		managementEndpoints.add(MAPPINGS_ENDPOINT);
+		managementEndpoints.add(METRICS_ENDPOINT);
+		managementEndpoints.add(SHUTDOWN_ENDPOINT);
 	}
 
 	@Override
