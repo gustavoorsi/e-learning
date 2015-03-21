@@ -24,12 +24,11 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 @Configuration
 @EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Order(WebSecurityConfig.ORDER_SECURITY_GENERAL_CONFIG) 
-public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+@Order(WebSecurityConfig.ORDER_SECURITY_GENERAL_CONFIG)
+public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	
 	protected final static int ORDER_SECURITY_AUTHORIZATION_CONFIG = 1;
 	protected final static int ORDER_SECURITY_AUTHENTICATION_CONFIG = 2;
 	protected final static int ORDER_SECURITY_GENERAL_CONFIG = 3;
-	
+
 }

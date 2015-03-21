@@ -11,8 +11,10 @@
 		
 		<!-- CSS resources -->
 	    <link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
-		<link href="../../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+		<link href="../../../../resources/css/bootstrap.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.css}"/>
 		<link href="../../../../resources/css/signin.css" rel="stylesheet" media="screen" th:href="@{/resources/css/signin.css}"/>
+		<link href="../../../../resources/css/social-buttons-3.css" rel="stylesheet" media="screen" th:href="@{/resources/css/social-buttons-3.css}"/>
+		<link href="../../../../resources/css/bootstrap-theme.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap-theme.css}"/>
 	    
 		<!-- javascript resources -->
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -27,9 +29,10 @@
 		<!--/* Content of this page will be decorated by the elements of basic_layout.html (layouts/basic_layout) */-->
 		<div layout:fragment="content">
 		
+			<!-- row -->
 			<div class="row">
 					
-				<form class="form-signin" th:action="@{/login}" method="POST">
+				<form class="form-signin" th:action="@{/login/authenticate}" method="POST">
 				
 					<div th:if="${param.error}" class="alert alert-error">
 	                    Invalid username and password.
@@ -52,6 +55,47 @@
 		      </form>
 		      
 			</div><!-- /row -->
+			
+			<!-- row -->
+			<div class="row">
+                <div class="form-group col-lg-4">
+                    <a th:href="@{/signup}" href="/signup">Create user account</a>
+                </div>
+            </div><!-- /row -->
+            
+           <!-- row -->
+		   <div class="row">
+            	<div class="panel panel-default">
+			        <div class="panel-body">
+			            <h2>Sign in by using social provider</h2>
+			            <div class="row social-button-row">
+			                <div class="col-lg-4">
+			                
+			                	<form class="form-signin" th:action="@{/auth/facebook}" method="POST">
+			                		<input type="hidden" name="scope" value="email" />
+			                		<button class="btn btn-facebook" type="submit"><i class="icon-facebook"></i> | Sign in with Facebook</button>
+			                	</form>
+			                
+			                </div>
+			            </div>
+			            <div class="row social-button-row">
+			                <div class="col-lg-4">
+			                	<form class="form-signin" th:action="@{/auth/twitter}" method="POST">
+			                		<button class="btn btn-twitter" type="submit"><i class="icon-twitter"></i> | Sign in with Twitter</button>
+			                	</form>
+			                </div>
+			            </div>
+			            <div class="row social-button-row">
+			                <div class="col-lg-4">
+			                	<form class="form-signin" th:action="@{/auth/linkedin}" method="POST">
+			                		<input type="hidden" name="scope" value="" />
+			                		<button class="btn btn-linkedin" type="submit"><i class="icon-linkedin"></i> | Sign in with Linkedin</button>
+			                	</form>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+            </div><!-- /row -->
 		
 		</div> <!-- /content -->
 	

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="en">
-
+<html layout:decorator="layouts/basic_layout" lan="en">
+	
 	<head>
 		<!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
 		<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Layout title</title>
@@ -21,24 +21,32 @@
 	</head>
 	
 	<body>
+	
+		<!-- content -->
+		<!--/* Content of this page will be decorated by the elements of basic_layout.html (layouts/basic_layout) */-->
+		<div layout:fragment="content">
 		
-		<!--/*  Multiple fragments may be defined in one file */-->
-		<div id="footer" th:fragment="footer">
+			<div class="row">
+					
+				<!-- col-xs-12 -->
+				<div class="col-xs-12">
+					<article>
+						<header>
+							<p>Home</p>
+						</header>
+						<footer class="hidden-xs">
+							<p>errors/error</p>
+						</footer>
+						<content>
+							<p>errors/error</p>
+						</content>					
+					</article>
+				</div><!-- /col-xs-12 -->
+
+			</div><!-- /row -->
 		
-			<footer class="footer">
-			  <div class="container">
-				<p class="text-muted">E-learning 2015</p>
-			  </div>
-			</footer>
-			
-	<!-- 		<footer class="footer" th:fragment="footer-admin"> -->
-	<!-- 		  <div class="container"> -->
-	<!-- 			<p class="text-muted">E-learning 2015 - Admin</p> -->
-	<!-- 		  </div> -->
-	<!-- 		</footer> -->
-		</div>
-		
+		</div> <!-- /content -->
+	
 	</body>
-
+	
 </html>
-
