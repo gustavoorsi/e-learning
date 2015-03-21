@@ -2,11 +2,16 @@ package com.elearning.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.elearning.model.constants.Role;
+import com.elearning.model.constants.SocialMediaService;
 
 /**
  * 
@@ -34,12 +39,15 @@ public class User {
 	@Column(unique = true, nullable = false)
 	private String email;
 
-	@NotEmpty(message = "Password is required.")
 	@Column
 	private String password;
 
-	@Column( name = "granted_authorities" )
-	private String grantedAuthorities;
+	@Column(name = "granted_authorities")
+	private String grantedAuthorities = Role.ROLE_USER.getName();
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sign_in_provider", length = 20)
+	private SocialMediaService signInProvider;
 
 	public User() {
 	}
@@ -51,6 +59,7 @@ public class User {
 		this.email = user.email;
 		this.password = user.password;
 		this.grantedAuthorities = user.grantedAuthorities;
+		this.signInProvider = user.signInProvider;
 	}
 
 	public User(final String email) {
@@ -108,6 +117,14 @@ public class User {
 
 	public void setGrantedAuthorities(String grantedAuthorities) {
 		this.grantedAuthorities = grantedAuthorities;
+	}
+
+	public SocialMediaService getSignInProvider() {
+		return signInProvider;
+	}
+
+	public void setSignInProvider(SocialMediaService signInProvider) {
+		this.signInProvider = signInProvider;
 	}
 
 	@Override

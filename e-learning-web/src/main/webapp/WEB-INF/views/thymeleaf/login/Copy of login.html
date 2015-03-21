@@ -12,6 +12,7 @@
 		<!-- CSS resources -->
 	    <link href="../../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
 		<link href="../../../../resources/css/bootstrap.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.css}"/>
+		<link href="../../../../resources/css/signin.css" rel="stylesheet" media="screen" th:href="@{/resources/css/signin.css}"/>
 	    
 		<!-- javascript resources -->
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -28,21 +29,28 @@
 		
 			<div class="row">
 					
-				<!-- col-xs-12 -->
-				<div class="col-xs-12">
-					<article>
-						<header>
-							<p>Home</p>
-						</header>
-						<footer class="hidden-xs">
-							<p>GENERAL ERROR</p>
-						</footer>
-						<content>
-							<p>GENERAL ERROR</p>
-						</content>					
-					</article>
-				</div><!-- /col-xs-12 -->
-
+				<form class="form-signin" th:action="@{/login/authenticate}" method="POST">
+				
+					<div th:if="${param.error}" class="alert alert-error">
+	                    Invalid username and password.
+	                </div>
+	                <div th:if="${param.logout}" class="alert alert-success">
+	                    You have been logged out.
+	                </div>
+				
+			        <h2 class="form-signin-heading">Please sign in</h2>
+			        <label for="username" class="sr-only">Email address</label>
+			        <input type="email" id="username" name="username" class="form-control" placeholder="Email address" required="true" autofocus="true"/>
+			        <label for="password" class="sr-only">Password</label>
+			        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true"/>
+			        <div class="checkbox">
+			          <label>
+			            <input type="checkbox" value="remember-me"> Remember me</input>
+			          </label>
+			        </div>
+			        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		      </form>
+		      
 			</div><!-- /row -->
 		
 		</div> <!-- /content -->
