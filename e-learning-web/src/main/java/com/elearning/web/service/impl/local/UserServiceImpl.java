@@ -1,4 +1,4 @@
-package com.elearning.web.service;
+package com.elearning.web.service.impl.local;
 
 import java.util.NoSuchElementException;
 
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.elearning.model.entities.User;
 import com.elearning.model.persistence.jparepositories.UserRepository;
 import com.elearning.web.form.RegistrationForm;
+import com.elearning.web.service.UserService;
 import com.elearning.web.service.exceptions.DuplicateEmailException;
 
 @Service

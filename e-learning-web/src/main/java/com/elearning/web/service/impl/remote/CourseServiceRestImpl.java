@@ -1,4 +1,4 @@
-package com.elearning.web.service;
+package com.elearning.web.service.impl.remote;
 
 import java.util.ArrayList;
 import java.util.Collections;

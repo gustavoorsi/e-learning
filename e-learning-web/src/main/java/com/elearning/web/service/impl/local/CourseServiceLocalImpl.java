@@ -1,4 +1,4 @@
-package com.elearning.web.service;
+package com.elearning.web.service.impl.local;
 
 import java.util.List;
 
