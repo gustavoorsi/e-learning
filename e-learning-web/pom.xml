@@ -21,6 +21,12 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- START: Local Dependencies. Dependencies on our own projects. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
 		<dependency>
 			<groupId>com.elearning</groupId>
 			<artifactId>e-learning-model</artifactId>
@@ -31,14 +37,23 @@
 			<artifactId>e-learning-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- END: Local Dependencies. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+
+
+
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- START: Web and UI. Template engines, ui side security, webjars (js,css, 
+			etc) as libraries, etc. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<!-- needed to consume the rest services that returns in hateoas format -->
-			<groupId>org.springframework.hateoas</groupId>
-			<artifactId>spring-hateoas</artifactId>
 		</dependency>
 		<dependency>
 			<!-- Thymeleaf dependency -->
@@ -68,7 +83,19 @@
 			<version>3.2.0-1</version>
 		</dependency>
 		<!-- WebJars END -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- END: Web and UI. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
 
+
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- START: Cloud integration. Some dependencies for cloud config, proxying, 
+			service discovery, etc. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
 		<dependency>
 			<!-- lib to centralize all config properties in the cloud under the project 
 				e-learning-cloudconfig. I'm saving the server port number for this microservice 
@@ -99,7 +126,28 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zuul</artifactId>
+		</dependency>
+		
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- START: Cloud integration. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
 
+
+
+
+
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- START: Security dependencies. Oauth2 is used to connect to rest api 
+			services -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
 		<dependency>
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
@@ -110,6 +158,44 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!-- END: Security dependencies. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+
+
+
+
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!--START: social integration. Used to signin with a social account -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-twitter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-facebook</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-twitter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-linkedin</artifactId>
+		</dependency>
 
 		<dependency>
 			<!-- Apache HttpClient (version 4.3.2). Apache HttpClient is an optional 
@@ -119,31 +205,22 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 		</dependency>
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+		<!--END: social integration. -->
+		<!-- ....................................................................................... -->
+		<!-- ....................................................................................... -->
+
+
 
 		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-security</artifactId>
+			<!-- needed to consume the rest services that returns in hateoas format -->
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-social-twitter</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-social-facebook</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-social-twitter</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-social-linkedin</artifactId>
-		</dependency>
+
 	</dependencies>
+
+
 
 </project>
