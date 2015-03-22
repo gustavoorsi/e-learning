@@ -36,12 +36,12 @@ public class MessageConverterConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MappingJackson2HttpMessageConverter jackson2Converter() {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converter.setObjectMapper(objectMapper());
+		converter.setObjectMapper(myObjectMapper());
 		return converter;
 	}
 
 	@Bean
-	public ObjectMapper objectMapper() {
+	public ObjectMapper myObjectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // set to pretty-print. Use it for dev purpose.
 		return objectMapper;

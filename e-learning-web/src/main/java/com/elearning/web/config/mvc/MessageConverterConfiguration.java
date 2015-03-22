@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.hateoas.hal.Jackson2HalModule;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -33,15 +35,18 @@ public class MessageConverterConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MappingJackson2HttpMessageConverter jackson2Converter() {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converter.setObjectMapper(objectMapper());
+		converter.setSupportedMediaTypes(MediaType.parseMediaTypes("application/hal+json"));
+		converter.setObjectMapper(converterObjectMapper());
+
 		return converter;
 	}
 
 	@Bean
-	public ObjectMapper objectMapper() {
+	public ObjectMapper converterObjectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // set to pretty-print. Use it for dev purpose.
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.registerModule(new Jackson2HalModule()); // support hal+json
 		return objectMapper;
 	}
 
