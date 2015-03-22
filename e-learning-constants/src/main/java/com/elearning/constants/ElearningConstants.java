@@ -5,7 +5,7 @@ public final class ElearningConstants {
 	
 	public static final class API_SERVICE_1{
 		
-		public static final String API_PATH = "/api/v1/microservice1Endpoint";
+		public static final String API_PATH = "/api/v1/service1";
 
 		// COURSES
 		public static final String COURSES = API_PATH + "/courses";

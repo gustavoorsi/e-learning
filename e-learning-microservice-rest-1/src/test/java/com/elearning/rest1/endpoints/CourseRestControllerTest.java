@@ -1,5 +1,7 @@
 package com.elearning.rest1.endpoints;
 
+import static com.elearning.constants.ElearningConstants.API_SERVICE_1.COURSES;
+
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -23,11 +25,11 @@ public class CourseRestControllerTest extends AbstractRestControllerTest {
 
 	@Test
 	public void getCourses_ShouldReturnAllCourses() throws Exception {
-		Page<Course> page = new PageImpl<Course>(getTestCourseList(), new PageRequest(0, 10), 1);
+		Page<Course> page = new PageImpl<Course>(getTestCourseList(), new PageRequest(0, 10), 3);
 
 		when(courseRepositoryMock.findAll(any(Pageable.class))).thenReturn(page);
 
-		mockMvc.perform(get("/courses")) //
+		mockMvc.perform(get(COURSES)) //
 				.andExpect(status().isOk()) //
 				.andExpect(content().contentType(MediaTypes.HAL_JSON)) //
 				.andExpect(jsonPath("$._embedded.courses", hasSize(2))) //

@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
@@ -17,7 +18,7 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 public class RestTemplatesConfiguration {
 
 	@Bean(name = "oauth2RestTemplateClientCredentials")
-	public OAuth2RestTemplate getOauth2RestTemplateClientCredentials() {
+	public OAuth2RestTemplate getOauth2RestTemplateClientCredentials(MappingJackson2HttpMessageConverter jackson2Converter) {
 
 		ClientCredentialsResourceDetails clientDetails = new ClientCredentialsResourceDetails();
 		clientDetails.setAccessTokenUri("http://localhost:8081/oauth/token");
@@ -27,6 +28,8 @@ public class RestTemplatesConfiguration {
 
 		DefaultOAuth2ClientContext clientContext = new DefaultOAuth2ClientContext();
 		OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(clientDetails, clientContext);
+
+		restTemplate.setMessageConverters(Arrays.asList(jackson2Converter));
 
 		return restTemplate;
 

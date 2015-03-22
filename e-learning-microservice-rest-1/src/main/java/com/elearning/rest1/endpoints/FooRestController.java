@@ -36,7 +36,7 @@ public class FooRestController {
 	@Autowired
 	private FooResourceAssembler fooResourceAssembler;
 
-	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/hal+json" })
 	public HttpEntity<PagedResources<FooResource>> getAll(//
 			@PageableDefault(size = 10, page = 0) Pageable pageable, //
 			PagedResourcesAssembler<Foo> assembler//

@@ -7,6 +7,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 //@formatter:off
@@ -34,6 +35,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableHystrix
 @EnableHystrixDashboard
 @ComponentScan(basePackages = { "com.elearning" })
+@EnableHypermediaSupport(type=EnableHypermediaSupport.HypermediaType.HAL)
 public class RootApplication {
 
 	public static void main(String[] args) {

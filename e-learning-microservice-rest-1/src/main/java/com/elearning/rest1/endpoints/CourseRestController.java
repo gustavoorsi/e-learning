@@ -73,7 +73,7 @@ public class CourseRestController {
 	 * 
 	 * @return a Page of <code>CourseResourece</code> instance containing all courses.
 	 */
-	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/hal+json" })
 	public HttpEntity<PagedResources<CourseResource>> getAll(//
 			@PageableDefault(size = 10, page = 0) Pageable pageable, //
 			PagedResourcesAssembler<Course> assembler //
