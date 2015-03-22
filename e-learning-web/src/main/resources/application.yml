@@ -24,12 +24,21 @@ management:
     role: ADMIN # ADMIN is the default role, but we explicitly set it. 
       
 
+zuul:
+  routes:
+    service1:
+      path: /api/service1/**
+      url: http://localhost:8081/api/v1/service1
+    service2:
+      path: /api/service2/**
+      url: http://localhost:8081/api/v1/service2
+
       
-spring.social.facebook.app.id: xxxxxxxxxxxxxxxxxxxxxxx
-spring.social.facebook.app.secret: xxxxxxxxxxxxxxxxxxxxxxx
+spring.social.facebook.app.id: 
+spring.social.facebook.app.secret: 
 
-spring.social.twitter.consumer.key: xxxxxxxxxxxxxxxxxxxxxxx
-spring.social.twitter.consumer.secret: xxxxxxxxxxxxxxxxxxxxxxx
+spring.social.twitter.consumer.key: 
+spring.social.twitter.consumer.secret: 
 
-spring.social.linkedin.app.id: xxxxxxxxxxxxxxxxxxxxxxx
-spring.social.linkedin.app.secret: xxxxxxxxxxxxxxxxxxxxxxx
+spring.social.linkedin.app.id: 
+spring.social.linkedin.app.secret: 
